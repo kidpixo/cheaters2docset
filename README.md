@@ -1,21 +1,11 @@
-To translate an existing IDLdoc (<http://idldoc.idldev.com/>) documentation follow this steps: 
+Translate existing cheatsheets from [Cheaters](http://brettterpstra.com/2012/03/04/cheaters-customizable-cheat-sheet-system/) to navigable documentation (docset) file to use with [Dash](http://kapeli.com/dash)
 
-1. build the directories structure as described in <http://kapeli.com/docsets/> or use the empty `IDLdoc` structure here. 
-2. copy your documentation in `IDLdoc/Contents/Resources/Documents/ `
-3. run the `IDLdoc_docset_creation.py` in the `IDLdoc/Contents/Resources/` directory 
-4. Change the `IDLdoc` name to `IDLdoc.docset`
-5. Create `~/Library/Application Support/Dash/DocSets/IDLdoc/` and put yout docset there.
+Still writing the code, the idea is:
 
-Optional : 
-4.1 change the `IDLdoc/icon.png` 
-4.2 adjust the `IDLdoc/Contents/nfo.plist` to change the docset name,shortcuts etc, then change all the name (IDLdoc to YourDoc_whatever).
+1. Feed the python script with your Cheaters' cheatsheets path like `/Users/YOUR_USER/cheaters/cheatsheets`
+2. The script take existing html file and put them in the sqlite DB (docSet.dsidx)
+3. (optional) the script translate all the Markdown file to html and put them in the sqlite DB (docSet.dsidx)
+4. Once installed in Dash, search in the box to select a language + space + search in the language sheet
 
-The python code does the following: 
-- scans only 2 level deep in the Documents folder 
-- deletes some files (`all-dirs.html`,`all-files.html` etc) 
-- sets as start page the `dir-overview.html` changing it to `index.html`
-- gets the title from each html page 
-- modifies the html erasing the top banner 
-- writes all in the sqlite DB `docSet.dsidx` 
 
-In order to run properly you need to have the sqlite3,urllib,BeautifulSoup and glob modules along your python distribution. 
+All the non-text cheatsheets  (html,md,mmd and so on) will be ignored.
