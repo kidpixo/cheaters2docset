@@ -30,9 +30,11 @@ You can run the `cheaters2docset.py` script, adapting all the relevant path and 
 
 I installed everything with macports on a Mac OSX 10.7.5 
 
-In this release I added an experimental[^fn-sample_footnote] version of the [PostgreSQL 9.0 Cheat Sheet](http://www.postgresonline.com/special_feature.php?sf_name=postgresql90_cheatsheet&amp;outputformat=html).
+In this release I added an experimental* version of the [PostgreSQL 9.0 Cheat Sheet](http://www.postgresonline.com/special_feature.php?sf_name=postgresql90_cheatsheet&amp;outputformat=html)
+and [PostGIS 2.0 Basic geometry/geography](http://www.postgis.us/downloads/postgis20_cheatsheet.html).
 
-[^fn-sample_footnote]: **experimental**: I don't have time to properly edit this file, so use it as it is. Any help is welcome!
+<br/>
+* **experimental**: I don't have time to properly edit this file, so use it as it is. Any help is welcome!
 
 ---
 
