@@ -1,5 +1,7 @@
 Translate existing cheatsheets from [Cheaters](http://brettterpstra.com/2012/03/04/cheaters-customizable-cheat-sheet-system/) to navigable documentation (docset) file to use with [Dash](http://kapeli.com/dash)
 
+![Dash open at the cheaters2docset](https://dl.dropboxusercontent.com/u/4762299/github_img/cheaters2docset/dash_cheaters.png)
+
 ---
 
 Interestling enough, I did use the `cheaters2docset.docset` to write this README.md
@@ -23,6 +25,8 @@ You can run the `cheaters2docset.py` script, adapting all the relevant path and 
     - os
     - subprocess
     - BeautifulSoup (not essential, but I like prettified html code)
+
+![Script running](https://dl.dropboxusercontent.com/u/4762299/github_img/cheaters2docset/compiling.png)
 
 I installed everything with macports on a Mac OSX 10.7.5 
 

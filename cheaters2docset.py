@@ -53,6 +53,7 @@ for file in filelist:
         f.write(foot)
         f.close()
         cur.execute("INSERT INTO searchIndex (path,type,name) VALUES (?,'func',?)",(filename_ext,filename))
+        print 'written > '+filename
 
 #commit the DB changes
 con.commit()
