@@ -1,39 +1,60 @@
 import sqlite3 as lite
 import glob
+import os
+import subprocess
 import BeautifulSoup
-import tidylib
 
+# import tidylib
 # import urllib
-# import os
 
-#document to erase
-# deletelist =[ "./Documents/all-dirs.html","./Documents/all-files.html","./Documents/idldoc-index.html","./Documents/index.html","./Documents/search.html","./Documents/categories.html","./Documents/dir-files.html" ,"./Documents/libdata.js"]+glob.glob('./Documents/*/dir-overview.html')
-# for f in deletelist:
-#     os.remove(f)
+cheaters_path = '/Users/damo_ma/Downloads/github_rep/cheaters/'
 
-# os.rename("./Documents/dir-overview.html", "./Documents/index.html")
+doc_path =  os.path.dirname(os.path.abspath(__file__))+'/cheaters2docset.docset/Contents/Resources/Documents/'
+db_path  =  os.path.dirname(os.path.abspath(__file__))+'/cheaters2docset.docset/Contents/Resources/docSet.dsidx'
+
+head ='<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>Cheat Sheets</title><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="css/cheaters.css"></head><body class="normal">'
+foot ='<script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script><script type="text/javascript" src="js/cheaters.js"></script></body></html>'
+
+# create an index from the github README.md - requires multimarkdown installed!
+b = os.system('multimarkdown '+cheaters_path+'README.md > '+doc_path+'index.html')
+
+#copy the CSS and javascript
+b = os.system('cp -R '+cheaters_path+'css/ '+doc_path+'css/')
+b = os.system('cp -R '+cheaters_path+'javascripts/ '+doc_path+'javascripts/')
+
+# file length using subprocess and `wc -l`
+def file_len(fname):
+    p = subprocess.Popen(['wc', '-l', fname], stdout=subprocess.PIPE, 
+                                              stderr=subprocess.PIPE)
+    result, err = p.communicate()
+    if p.returncode != 0:
+        raise IOError(err)
+    return int(result.strip().split()[0])
 
 # html in cheaters directory listed
-filelist = glob.glob('/Users/damo_ma/Downloads/github_rep/cheaters/cheatsheets/*.html')
+filelist = glob.glob(cheaters_path+'cheatsheets/*.html')
 
-# #connect to the sqlite db
-# con = lite.connect('./cheaters2docset/Contents/Resources/docSet.dsidx')
-# cur = con.cursor()    
-# #erase all
-# cur.execute('DELETE FROM searchIndex')
+#connect to the sqlite db
+con = lite.connect(db_path)
+cur = con.cursor()    
+#erase all
+cur.execute('DELETE FROM searchIndex')
 
 #insert the file in the filelist and beautify the html file
 for file in filelist:
-    #get the soup ready...
-    soup = BeautifulSoup.BeautifulSoup(open(file))
-    #skipping the source code
-    
-    print title.title(),file.lstrip('./Documents/')
-    #insert in the DB    
-    cur.execute("INSERT INTO searchIndex (path,type,name) VALUES (?,'func',?)",(file.lstrip('./Documents/'),title.title()),verbose=1)
-    
-# #delete the directories entry
-# cur.execute('DELETE FROM searchIndex WHERE name LIKE "%\%"')
-# 
-# #commit the DB changes
-# con.commit()
+    if file_len(file) > 10 :
+        filename_ext = os.path.basename(file)
+        filename=os.path.splitext(filename_ext)[0]
+        soup = BeautifulSoup.BeautifulSoup(open(file))
+        #re-write the html prettifyied file
+        f = open(doc_path+filename_ext, "w")
+        f.write(head)
+        f.write(soup.prettify())
+        f.write(foot)
+        f.close()
+        cur.execute("INSERT INTO searchIndex (path,type,name) VALUES (?,'func',?)",(filename_ext,filename))
+
+#commit the DB changes
+con.commit()
+#close the DB
+con.close()

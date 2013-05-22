@@ -2,11 +2,11 @@
 <plist version="1.0">
 <dict>
 <key>CFBundleIdentifier</key>
-<string>Cheaters2docset</string>
+<string>cheat</string>
 <key>CFBundleName</key>
-<string>Cheaters2docset</string>
+<string>cheat</string>
 <key>DocSetPlatformFamily</key>
-<string>Cheaters2docset</string>
+<string>cheat</string>
 <key>isDashDocset</key><true/>
 <key>dashIndexFilePath</key>
 <string>index.html</string>
