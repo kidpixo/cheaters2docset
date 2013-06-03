@@ -36,14 +36,18 @@ All cheatsheets available in Brett's [Cheaters](http://brettterpstra.com/2012/03
 - trickster
 - vim
 
-A couple cheatsheets I did:
+A couple experimental* cheatsheets I did:
+.
 
-- postgresql90.md ([gist link](https://gist.github.com/kidpixo/5618697))
-- postgis2.0.md ([gist link](https://gist.github.com/kidpixo/5698476))
-- svn.md ([gist link](https://gist.github.com/kidpixo/5699219))
+
+- [PostgreSQL 9.0 Cheatsheet](http://www.postgresonline.com/special_feature.php?sf_name=postgresql90_cheatsheet&amp;outputformat=html) > Markdown version on [gist](https://gist.github.com/kidpixo/5618697)
+- [PostGIS 2.0 Cheatsheet](http://www.postgis.us/downloads/postgis20_cheatsheet.html) >  Markdown version on [gist](https://gist.github.com/kidpixo/5698476)
+- [Subversion Cheatsheet by DaveChild](http://www.cheatography.com/davechild/cheat-sheets/subversion/)> Markdown version on [gist](https://gist.github.com/kidpixo/5699219)
 
 I'm happy to have contribution on cheatsheets translation, markdown preferred, but html is accepted too.
 
+<br/>
+* **experimental**: I don't have time to properly edit this file, so use it as it is. Any help is welcome!
 
 
 ## How to to : Short Version
@@ -84,10 +88,4 @@ You can run the `cheaters2docset.py` script, adapting all the path in the the py
 ![Script running](https://dl.dropboxusercontent.com/u/4762299/github_img/cheaters2docset/compiling.png)
 
 I installed everything with macports on a Mac OSX 10.7.5 and on 10.8.2, works fine. 
-
-In this release I added an experimental* version of the [PostgreSQL 9.0 Cheat Sheet](http://www.postgresonline.com/special_feature.php?sf_name=postgresql90_cheatsheet&amp;outputformat=html)
-and [PostGIS 2.0 Basic geometry/geography](http://www.postgis.us/downloads/postgis20_cheatsheet.html).
-
-<br/>
-* **experimental**: I don't have time to properly edit this file, so use it as it is. Any help is welcome!
 
