@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Subversion Cheatsheet</title>
+	<link type="text/css" rel="stylesheet" href="css/cheaters.css"/>
+</head>
+<body>
+
+<h1 id="subversioncheatsheet">Subversion Cheatsheet</h1>
+
+<p><a href="http://www.cheatography.com/davechild/cheat-sheets/subversion/">Permalink to Subversion Cheatsheet</a>
+<br/></p>
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;" colspan="2">Subversion Resources</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">Homepage</td>
+	<td style="text-align:left;"><a href="http://subversion.apache.org/">http://subversion.apache.org/</a></td>
+</tr>
+<tr>
+	<td style="text-align:left;">SVN Book</td>
+	<td style="text-align:left;"><a href="http://svnbook.red-bean.com/">http://svnbook.red-bean.com/</a></td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;" colspan="2">Subversion Components</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">svn</td>
+	<td style="text-align:left;">Command line program</td>
+</tr>
+<tr>
+	<td style="text-align:left;">svnversion</td>
+	<td style="text-align:left;">Revision of working copy</td>
+</tr>
+<tr>
+	<td style="text-align:left;">svnlook</td>
+	<td style="text-align:left;">Inspect repository</td>
+</tr>
+<tr>
+	<td style="text-align:left;">svnadmin</td>
+	<td style="text-align:left;">Repository administration</td>
+</tr>
+<tr>
+	<td style="text-align:left;">svndumpfilter</td>
+	<td style="text-align:left;">Filter repository stream</td>
+</tr>
+<tr>
+	<td style="text-align:left;">mod_dav_svn</td>
+	<td style="text-align:left;">Apache module</td>
+</tr>
+<tr>
+	<td style="text-align:left;">svnserve</td>
+	<td style="text-align:left;">SVN server (SVN protocol)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">svnsync</td>
+	<td style="text-align:left;">Mirror repository</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;" colspan="2">Subversion Protocols</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">file://</td>
+	<td style="text-align:left;">Local machine</td>
+</tr>
+<tr>
+	<td style="text-align:left;">http://</td>
+	<td style="text-align:left;">HTTP (Apache)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">https://</td>
+	<td style="text-align:left;">HTTPS (SSL)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">svn://</td>
+	<td style="text-align:left;">SVN (svnserve)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">svn%2Bssh://</td>
+	<td style="text-align:left;">SVN over SSH</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;" colspan="2">Subversion Help</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;" colspan="2">$ svn help</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn help import Show help for &#8220;import&#8221; command</td>
+</tr>
+<tr>
+	<td style="text-align:left;" colspan="2">The $ symbol is used to denote commands to be typed.</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;" colspan="2">Subversion Repository Administration</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">$ svnadmin create &#8220;/path/to/repository&#8221;</td>
+	<td style="text-align:left;">Create new repository</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svnadmin setlog &#8220;/path&#8221; -r 7 message.txt</td>
+	<td style="text-align:left;">Change log message for revision 7 to contents of file message.txt</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svnadmin dump &#8220;/path/to/repository&#8221; &gt; filename</td>
+	<td style="text-align:left;">Dump repository to file (backup)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svnadmin load &#8220;/path/to/repository&#8221; &lt; filename</td>
+	<td style="text-align:left;">Load repository from file (restore)</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;" colspan="2">Subversion Property Commands</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">$ svn proplist &#8220;/path&#8221;</td>
+	<td style="text-align:left;">List properties</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn propset PROP VAL &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Set PROP to VAL for path.</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn propget PROP &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Get value of PROP</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn propedit PROP &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Edit PROP</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn propdel PROP &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Delete PROP</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;" colspan="2">Subversion Checkout Working Copy</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">$ svn checkout &#8220;/path/to/repository&#8221;</td>
+	<td style="text-align:left;">Checkout working copy into current folder</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn checkout &#8220;/path/to/repository&#8221; &#8220;/path/to/folder&#8221;</td>
+	<td style="text-align:left;">Checkout working copy into target folder</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;" colspan="2">Subversion Update Working Copy</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">$ svn update &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Update path</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn update -r9 &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Update path to revision 9</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;" colspan="2">Subversion Add Files and Folders</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">$ svn add *</td>
+	<td style="text-align:left;">Add all items, recursively</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn add itemname</td>
+	<td style="text-align:left;">Add itemname (if folder, adds recursively)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn add * &#8211;force</td>
+	<td style="text-align:left;">Force recursion into versioned directories</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;" colspan="2">Subversion Commit Changes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">$ svn commit &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Commit changes to path</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn commit -m &#8220;Message&#8221; &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Commit with log message</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn commit -N &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Commit without recursion</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn import &#8220;/path/to/folder&#8221; &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Import and commit local folder</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;" colspan="2">Subversion Deleting, Copying and Moving</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">$ svn delete &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Delete path</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn -m &#8220;Delete message&#8221; delete &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Delete with log message</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn copy &#8220;/source&#8221; &#8220;/target&#8221;</td>
+	<td style="text-align:left;">Copy source to target</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn move &#8220;/source&#8221; &#8220;/target&#8221;</td>
+	<td style="text-align:left;">Move source to target</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;" colspan="2">Subversion Logs and Blame</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">$ svn log &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Show log messages for path</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn blame &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Show commits for path</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;" colspan="2">Subversion Revert Changes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">$ svn revert &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Revert changes to path</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn revert -R &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Revert changes recursively</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Subversion Differences Between Files</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">$ svn diff &#8220;/path/file&#8221;</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn diff &#8220;/path/file@2&#8221; &#8220;/path/file@7&#8221;</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn diff -r 2:7 &#8220;/path/folder&#8221;</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;" colspan="2">Subversion Merge Changes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">$ svn merge -r2:7 &#8220;item&#8221; &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Apply diff between revisions 2 and 7 of &#8220;item&#8221; to path</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn merge &#8220;url1&#8221; &#8220;url2&#8221; &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Apply diff between &#8220;url1&#8221; and &#8220;url2&#8221; to path</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;" colspan="2">Subversion Miscellaneous Commands</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">$ svn resolve &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Resolve conflict</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn cleanup &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Remove locks and complete operations</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn lock &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Lock path</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn unlock &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Unlock path</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn status &#8220;/path&#8221;</td>
+	<td style="text-align:left;">Get path status</td>
+</tr>
+<tr>
+	<td style="text-align:left;">$ svn cat &#8220;/path&#8221;</td>
+	<td style="text-align:left;">View file contents</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;" colspan="2">Subversion Item and Property Statuses</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;"></td>
+	<td style="text-align:left;">No modifications (blank)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">A</td>
+	<td style="text-align:left;">Addition</td>
+</tr>
+<tr>
+	<td style="text-align:left;">D</td>
+	<td style="text-align:left;">Deletion</td>
+</tr>
+<tr>
+	<td style="text-align:left;">M</td>
+	<td style="text-align:left;">Modified</td>
+</tr>
+<tr>
+	<td style="text-align:left;">R</td>
+	<td style="text-align:left;">Item replaced</td>
+</tr>
+<tr>
+	<td style="text-align:left;">C</td>
+	<td style="text-align:left;">In conflict</td>
+</tr>
+<tr>
+	<td style="text-align:left;">X</td>
+	<td style="text-align:left;">Externals definition</td>
+</tr>
+<tr>
+	<td style="text-align:left;">I</td>
+	<td style="text-align:left;">Ignored</td>
+</tr>
+<tr>
+	<td style="text-align:left;">?</td>
+	<td style="text-align:left;">Not in repository</td>
+</tr>
+<tr>
+	<td style="text-align:left;">!</td>
+	<td style="text-align:left;">Item missing</td>
+</tr>
+<tr>
+	<td style="text-align:left;">~</td>
+	<td style="text-align:left;">Object type changed</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;" colspan="2">Subversion Argument Shortcuts</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">-m &#8220;Message&#8221;</td>
+	<td style="text-align:left;">--message</td>
+</tr>
+<tr>
+	<td style="text-align:left;">-q</td>
+	<td style="text-align:left;">--quiet</td>
+</tr>
+<tr>
+	<td style="text-align:left;">-v</td>
+	<td style="text-align:left;">--verbose</td>
+</tr>
+<tr>
+	<td style="text-align:left;">-r</td>
+	<td style="text-align:left;">--revision</td>
+</tr>
+<tr>
+	<td style="text-align:left;">-c</td>
+	<td style="text-align:left;">--change</td>
+</tr>
+<tr>
+	<td style="text-align:left;">-t</td>
+	<td style="text-align:left;">--transaction</td>
+</tr>
+<tr>
+	<td style="text-align:left;">-R</td>
+	<td style="text-align:left;">--recursive</td>
+</tr>
+<tr>
+	<td style="text-align:left;">-N</td>
+	<td style="text-align:left;">--non-recursive</td>
+</tr>
+</tbody>
+</table>
+
+
+</body>
+</html>

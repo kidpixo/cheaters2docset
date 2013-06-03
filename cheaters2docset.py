@@ -7,8 +7,15 @@ import BeautifulSoup
 # import tidylib
 # import urllib
 
-cheaters_path = '/Users/damo_ma/Downloads/github_rep/cheaters/'
+###################################
+# CUSTOMIZE THIS PATH : POINT IT TO 
+# THE DIRECTORY CONTAINING cheaters
 
+cheaters_path = '../cheaters/' # accepts relative path
+
+#
+#
+###################################                 
 doc_path =  os.path.dirname(os.path.abspath(__file__))+'/cheaters2docset.docset/Contents/Resources/Documents/'
 db_path  =  os.path.dirname(os.path.abspath(__file__))+'/cheaters2docset.docset/Contents/Resources/docSet.dsidx'
 
@@ -54,6 +61,18 @@ for file in filelist:
         f.close()
         cur.execute("INSERT INTO searchIndex (path,type,name) VALUES (?,'func',?)",(filename_ext,filename))
         print 'written > '+filename
+
+
+# Markdown files in local cheatsheets/ directory
+filelist_local = glob.glob(os.path.dirname(os.path.abspath(__file__))+'/cheatsheets/*.md')
+
+#insert the file in the filelist and beautify the html file
+for file in filelist_local:
+    filename_ext = os.path.basename(file)
+    filename=os.path.splitext(filename_ext)[0]
+    b = os.system('multimarkdown '+file+' > '+doc_path+filename+'.html')
+    cur.execute("INSERT INTO searchIndex (path,type,name) VALUES (?,'func',?)",(filename+'.html',filename))
+    print 'converted MD file > '+filename
 
 #commit the DB changes
 con.commit()
