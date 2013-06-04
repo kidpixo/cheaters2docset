@@ -59,7 +59,7 @@ for file in filelist:
         f.write(soup.prettify())
         f.write(foot)
         f.close()
-        cur.execute("INSERT INTO searchIndex (path,type,name) VALUES (?,'func',?)",(filename_ext,filename))
+        cur.execute("INSERT INTO searchIndex (path,type,name) VALUES (?,'Guide',?)",(filename_ext,filename))
         print 'written > '+filename
 
 
@@ -71,10 +71,14 @@ for file in filelist_local:
     filename_ext = os.path.basename(file)
     filename=os.path.splitext(filename_ext)[0]
     b = os.system('multimarkdown '+file+' > '+doc_path+filename+'.html')
-    cur.execute("INSERT INTO searchIndex (path,type,name) VALUES (?,'func',?)",(filename+'.html',filename))
+    cur.execute("INSERT INTO searchIndex (path,type,name) VALUES (?,'Guide',?)",(filename+'.html',filename))
     print 'converted MD file > '+filename
 
 #commit the DB changes
 con.commit()
 #close the DB
 con.close()
+
+b = os.system("tar --exclude='.DS_Store' -cvzf cheaters2docset.tgz cheaters2docset.docset")
+
+
