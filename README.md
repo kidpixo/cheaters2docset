@@ -2,7 +2,9 @@
 
 Translate existing cheatsheets from [Cheaters](http://brettterpstra.com/2012/03/04/cheaters-customizable-cheat-sheet-system/) to navigable documentation (docset) file to use with [Dash](http://kapeli.com/dash)
 
-Now you can subscribe to the feed to get automatic update of the docset here [subscribe to cheaters2docset.xml](dash-feed://https%3A%2F%2Fraw.github.com%2Fkidpixo%2Fcheaters2docset%2Fmaster%2Fcheaters2docset.xml).
+**Now with code fragment highlight** thanks to the power of [highlight.js](http://softwaremaniacs.org/soft/highlight/en/) and [jquery.js](http://jquery.com/) and [Brett](http://brettterpstra.com/), tinkering on his code I learned all this!. 
+
+**Now you can subscribe to the feed** to get automatic update of the docset here [subscribe to cheaters2docset.xml](dash-feed://https%3A%2F%2Fraw.github.com%2Fkidpixo%2Fcheaters2docset%2Fmaster%2Fcheaters2docset.xml).
 
 ![Dash open at the cheaters2docset](https://dl.dropboxusercontent.com/u/4762299/github_img/cheaters2docset/dash_cheaters.png)
 
