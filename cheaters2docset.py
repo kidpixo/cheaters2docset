@@ -19,17 +19,27 @@ cheaters_path = '../cheaters/' # accepts relative path
 doc_path =  os.path.dirname(os.path.abspath(__file__))+'/cheaters2docset.docset/Contents/Resources/Documents/'
 db_path  =  os.path.dirname(os.path.abspath(__file__))+'/cheaters2docset.docset/Contents/Resources/docSet.dsidx'
 
-head ='<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>Cheat Sheets</title><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="css/cheaters.css"></head><body class="normal">'
+head ='<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>Cheat Sheets</title><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="css/cheaters.css"></head><body class="normal"><script src="javascripts/jquery.min.js"></script><script src="javascripts/smooth_scrolling.lopash.js"></script><script src="javascripts/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script>'
 foot ='<script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script><script type="text/javascript" src="js/cheaters.js"></script></body></html>'
 
 # create an index from the github README.md - requires multimarkdown installed!
 b = os.system('multimarkdown '+cheaters_path+'README.md > '+doc_path+'index.html')
 
-#copy the CSS and javascript
+###################################                 
+# copy the CSS
 b = os.system('cp -R '+cheaters_path+'css/ '+doc_path+'css/')
-b = os.system('cp -R '+cheaters_path+'javascripts/ '+doc_path+'javascripts/')
+# backup original css file
+b = os.system('cp -R '+doc_path+'css/cheaters.css '+doc_path+'css/cheaters_back.css ')
+# copy custom css files
+b = os.system('cp css/* '+doc_path+'css/ ')
 
-# file length using subprocess and `wc -l`
+###################################                 
+#copy the local javascript directory
+b = os.system('cp -R javascripts/ '+doc_path+'javascripts/')
+
+
+###################################                 
+# file length check using subprocess and `wc -l`
 def file_len(fname):
     p = subprocess.Popen(['wc', '-l', fname], stdout=subprocess.PIPE, 
                                               stderr=subprocess.PIPE)
@@ -80,5 +90,4 @@ con.commit()
 con.close()
 
 b = os.system("tar --exclude='.DS_Store' -cvzf cheaters2docset.tgz cheaters2docset.docset")
-
 

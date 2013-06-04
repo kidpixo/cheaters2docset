@@ -1,5 +1,10 @@
 Title:  PostGIS 2.0 Cheatsheet
 CSS : css/cheaters.css
+HTML header:   <script src="javascripts/jquery.min.js"></script>
+HTML header:   <script src="javascripts/smooth_scrolling.lopash.js"></script>
+HTML header:   <script src="javascripts/highlight.pack.js"></script>
+  
+
 
 # PostGIS 2.0 Cheatsheet
 

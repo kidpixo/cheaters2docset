@@ -2,6 +2,8 @@
 
 Translate existing cheatsheets from [Cheaters](http://brettterpstra.com/2012/03/04/cheaters-customizable-cheat-sheet-system/) to navigable documentation (docset) file to use with [Dash](http://kapeli.com/dash)
 
+Now you can subscribe to the feed to get automatic update of the docset here [subscribe to cheaters2docset.xml](dash-feed://https%3A%2F%2Fraw.github.com%2Fkidpixo%2Fcheaters2docset%2Fmaster%2Fcheaters2docset.xml).
+
 ![Dash open at the cheaters2docset](https://dl.dropboxusercontent.com/u/4762299/github_img/cheaters2docset/dash_cheaters.png)
 
 ## Cheatsheet included
@@ -37,8 +39,6 @@ All cheatsheets available in Brett's [Cheaters](http://brettterpstra.com/2012/03
 - vim
 
 A couple experimental* cheatsheets I did:
-.
-
 
 - [PostgreSQL 9.0 Cheatsheet](http://www.postgresonline.com/special_feature.php?sf_name=postgresql90_cheatsheet&amp;outputformat=html) > Markdown version on [gist](https://gist.github.com/kidpixo/5618697)
 - [PostGIS 2.0 Cheatsheet](http://www.postgis.us/downloads/postgis20_cheatsheet.html) >  Markdown version on [gist](https://gist.github.com/kidpixo/5698476)
