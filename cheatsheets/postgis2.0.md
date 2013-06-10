@@ -20,7 +20,7 @@ HTML header:   <script>hljs.initHighlightingOnLoad();</script>
 |geometry_dump|A spatial datatype with two fields - geom (holding a geometry object) and path[] (a 1-d array holding the position of the geometry within the dumped object.)|
 |geography|Ellipsoidal spatial data type.|
 
-|||
+|Management Functions||
 |  :----------  |  :---------- |
 |AddGeometryColumn[^2][^3d]|Adds a geometry column to an existing table of attributes. By default uses type modifier to define rather than constraints. Pass in false for use_typmod to get old check constraint based behavior<br/>*1.table_name, column_name, srid, type, dimension, use_typmod=true <br/>2. schema_name, table_name, column_name, srid, type, dimension, use_typmod=true <br/>3. catalog_name, schema_name, table_name, column_name, srid, type, dimension, use_typmod=true*|
 |DropGeometryColumn[^3d]|Removes a geometry column from a spatial table.<br/>*1.table_name, column_name<br/>2.schema_name, table_name, column_name<br/>3.catalog_name, schema_name, table_name, column_name*|
@@ -37,7 +37,6 @@ HTML header:   <script>hljs.initHighlightingOnLoad();</script>
 |PostGIS_Version ()|Returns PostGIS version number and compile-time options.|
 |Populate_Geometry_Columns[^2]|Ensures geometry columns are defined with type modifiers or have appropriate spatial constraints This ensures they will be registered correctly in geometry_columns view. By default will convert all geometry columns with no type modifier to ones with type modifiers. To get old behavior set use_typmod=false<br/>*1.use_typmod=true<br/>2.relation_oid, use_typmod=true*|
 |UpdateGeometrySRID[^3d]|Updates the SRID of all features in a geometry column, geometry_columns metadata and srid. If it was enforced with constraints, the constraints will be updated with new srid constraint. If the old was enforced by type definition, the type definition will be changed.<br/>*1.table_name, column_name, srid<br/>2.schema_name, table_name, column_name, srid<br/>3.catalog_name, schema_name, table_name, column_name, srid*|
-[Management Functions][Management_Functions_table]
 
 |Geometry Constructors||
 |  :----------  |  :---------- |
