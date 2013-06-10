@@ -1,0 +1,875 @@
+/*------- begin updated by Kerri -------*/
+
+.left_menu {
+	font-family : Verdana ;
+	font-size : 10pt ;
+	margin-top : 60px ; 
+}
+
+.bb_credit {
+	font-family : Verdana ;
+	font-size : 8pt ;
+}
+
+.company {
+	font-family : Verdana ;
+	font-size : 14pt ;
+	font-weight : bold ; 
+	margin-top : 22px ;
+}
+
+.logo {
+	float : left ; 
+	margin-top : -10px ; 
+	margin-right : 10px ; 
+}
+
+
+li {
+	font-family: "Verdana", sans-serif;
+}
+
+/*------- end updated by Kerri -------*/
+
+table {
+	border-top:     1px solid #ddd;
+	border-left:    1px solid #ddd;
+}
+th,td {
+	border-bottom:  1px solid #ddd;
+	border-right:   1px solid #ddd;
+}
+table.no_border, table.no_border td, table.no_border th {
+	border:     0px solid #ddd;
+}
+
+h1 {
+	font-size: 16pt;
+	font-weight: bold;
+	font-family: "Verdana", sans-serif;
+}
+
+h2 {
+	font-size: 14pt;
+	font-weight: bold;
+	font-family: "Verdana", sans-serif;
+
+}
+
+h3 {
+	font-size: 12pt;
+	font-weight: bold;
+	font-family: "Verdana", sans-serif;
+
+}
+
+h4 {
+	font-size: 10pt;
+	font-weight: bold;
+	font-family: "Verdana", sans-serif;
+}
+
+a {
+	color: #3366cc;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+P.Body, body p {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 6.0pt;
+	margin-right: 14.0pt;
+	margin-left: 0.0pt;
+	font-size: 9.0pt;
+	font-weight: medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+	background-color: #fff;
+}
+LI.Bullet-First {
+	text-align: left;
+	margin-top: 7.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 28.0pt;
+	margin-left: 18.0pt;
+	font-size: 9.0pt;
+	font-weight: medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+LI.Bullet-List {
+	text-align: left;
+	margin-top: 7.0pt;
+	margin-bottom: 7.0pt;
+	margin-right: 28.0pt;
+	margin-left: 18.0pt;
+	font-size: 9.0pt;
+	font-weight: medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+LI.Bullet-Tight {
+	text-align: left;
+	margin-top: 3.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 28.0pt;
+	margin-left: 18.0pt;
+	font-size: 9.0pt;
+	font-weight: medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+P.CellBody {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 8.0pt;
+	font-weight: Medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+P.CellHeading {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 10.0pt;
+	font-weight: bold;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+H1.Chapter-, H2.Chapter-, H3.Chapter-, H4.Chapter-, H5.Chapter-, H6.Chapter- {
+	display: block;
+	text-align: center;
+	text-indent: 0.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 74.0pt;
+	font-weight: Bold;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: uppercase;
+	font-family: "Verdana", sans-serif;
+}
+H1.Chapter-no-TOC-, H2.Chapter-no-TOC-, H3.Chapter-no-TOC-, H4.Chapter-no-TOC-, H5.Chapter-no-TOC-, H6.Chapter-no-TOC- {
+	display: block;
+	text-align: center;
+	text-indent: 0.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 74.0pt;
+	font-weight: Bold;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: uppercase;
+	font-family: "Verdana", sans-serif;
+}
+H1.Chapter-TOC, H2.Chapter-TOC, H3.Chapter-TOC, H4.Chapter-TOC, H5.Chapter-TOC, H6.Chapter-TOC {
+	display: block;
+	text-align: right;
+	text-indent: 0.0pt;
+	margin-top: 12.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 14.0pt;
+	font-weight: Medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+H1.Chapter-Side-, H2.Chapter-Side-, H3.Chapter-Side-, H4.Chapter-Side-, H5.Chapter-Side-, H6.Chapter-Side- {
+	display: block;
+	text-align: right;
+	text-indent: 0.0pt;
+	margin-top: 12.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 14.0pt;
+	font-weight: Medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+P.Chapter-Title {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 24.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 26.0pt;
+	font-weight: Bold;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+P.Chapter-TitleTOC {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 12.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 14.0pt;
+	font-weight: bold;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+H1.Chapter-TOC-1, H2.Chapter-TOC-1, H3.Chapter-TOC-1, H4.Chapter-TOC-1, H5.Chapter-TOC-1, H6.Chapter-TOC-1 {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 0.0pt;
+	margin-left: 18.0pt;
+	font-size: 8.0pt;
+	font-weight: medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+P.Chapter-TOC-2 {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 36.0pt;
+	margin-left: 36.0pt;
+	font-size: 8.0pt;
+	font-weight: medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+P.Code {
+	display: block;
+	text-align: left;
+	text-indent: 12.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 14.0pt;
+	margin-left: 0.0pt;
+	font-size: 9.0pt;
+	font-weight: medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Courier";
+}
+P.Code-Last {
+	display: block;
+	text-align: left;
+	text-indent: 12.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 8.0pt;
+	margin-right: 14.0pt;
+	margin-left: 0.0pt;
+	font-size: 9.0pt;
+	font-weight: medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Courier";
+}
+P.Code-Indented {
+	display: block;
+	text-align: left;
+	text-indent: 12.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 8.0pt;
+	margin-right: 14.0pt;
+	margin-left: 27.0pt;
+	font-size: 9.0pt;
+	font-weight: medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Courier";
+}
+P.Code-Indented-No-Space {
+	display: block;
+	text-align: left;
+	text-indent: 12.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 14.0pt;
+	margin-left: 27.0pt;
+	font-size: 9.0pt;
+	font-weight: medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Courier";
+}
+H1.Code-Last, H2.Code-Last, H3.Code-Last, H4.Code-Last, H5.Code-Last, H6.Code-Last {
+	display: block;
+	text-align: left;
+	text-indent: 12.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 8.0pt;
+	margin-right: 14.0pt;
+	margin-left: 0.0pt;
+	font-size: 9.0pt;
+	font-weight: medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Courier";
+}
+P.Explain {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 7.0pt;
+	margin-right: 28.0pt;
+	margin-left: 18.0pt;
+	font-size: 9.0pt;
+	font-weight: medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+P.Explain-More {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 7.0pt;
+	margin-right: 28.0pt;
+	margin-left: 18.0pt;
+	font-size: 9.0pt;
+	font-weight: medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+P.Footer {
+	display: block;
+	text-align: justify;
+	text-indent: 0.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 9.0pt;
+	font-weight: Medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+P.Footnote {
+	display: block;
+	text-align: left;
+	text-indent: -12.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 18.0pt;
+	margin-left: 30.0pt;
+	font-size: 10.0pt;
+	font-weight: medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+H1.Heading-1, H2.Heading-1, H3.Heading-1, H4.Heading-1, H5.Heading-1, H6.Heading-1 {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 20.0pt;
+	margin-bottom: 3.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 18.0pt;
+	font-weight: Bold;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+P.Heading-1TOC {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 10.0pt;
+	font-weight: medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+H1.Heading-2, H2.Heading-2, H3.Heading-2, H4.Heading-2, H5.Heading-2, H6.Heading-2 {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 14.0pt;
+	margin-bottom: 1.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 14.0pt;
+	font-weight: Bold;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+P.Heading-2TOC {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 36.0pt;
+	margin-left: 36.0pt;
+	font-size: 9.0pt;
+	font-weight: medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+H1.Heading-3, H2.Heading-3, H3.Heading-3, H4.Heading-3, H5.Heading-3, H6.Heading-3 {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 8.0pt;
+	margin-bottom: 2.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 10.0pt;
+	font-weight: Bold;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+P.Heading-3TOC {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 12.0pt;
+	font-weight: Medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+H1.Heading-4, H2.Heading-4, H3.Heading-4, H4.Heading-4, H5.Heading-4, H6.Heading-4 {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 10.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 10.0pt;
+	font-weight: Bold;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+H1.Heading1, H2.Heading1, H3.Heading1, H4.Heading1, H5.Heading1, H6.Heading1 {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 14.0pt;
+	margin-bottom: 6.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 14.0pt;
+	font-weight: Bold;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+H1.Heading2, H2.Heading2, H3.Heading2, H4.Heading2, H5.Heading2, H6.Heading2 {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 12.0pt;
+	margin-bottom: 3.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 12.0pt;
+	font-weight: Bold;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+H1.HeadingRunIn, H2.HeadingRunIn, H3.HeadingRunIn, H4.HeadingRunIn, H5.HeadingRunIn, H6.HeadingRunIn {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 6.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 12.0pt;
+	font-weight: Bold;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+
+P.Indented {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 0.0pt;
+	margin-left: 18.0pt;
+	font-size: 10.0pt;
+	font-weight: medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+H1.Note-Head, H2.Note-Head, H3.Note-Head, H4.Note-Head, H5.Note-Head, H6.Note-Head {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 8.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 9.0pt;
+	font-style: Italic;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+P.Note-Text {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 7.0pt;
+	margin-bottom: 7.0pt;
+	margin-right: 14.0pt;
+	margin-left: 18.0pt;
+	font-size: 8.0pt;
+	font-weight: Medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+LI.Number-First {
+	display: block;
+	text-align: left;
+	text-indent: -18.0pt;
+	margin-top: 7.0pt;
+	margin-bottom: 7.0pt;
+	margin-right: 0.0pt;
+	margin-left: 18.0pt;
+	font-size: 12.0pt;
+	font-weight: Bold;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+H6.Number-First {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 7.0pt;
+	margin-bottom: 7.0pt;
+	margin-right: 0.0pt;
+	margin-left: 18.0pt;
+	font-size: 9.0pt;
+	font-weight: Bold;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+LI.Number-List {
+	display: block;
+	text-align: left;
+	text-indent: -30.0pt;
+	margin-top: 7.0pt;
+	margin-bottom: 7.0pt;
+	margin-right: 0.0pt;
+	margin-left: 18.0pt;
+	font-size: 9.0pt;
+	font-weight: Bold;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+LI.Numbered {
+	display: block;
+	text-align: left;
+	text-indent: -18.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 0.0pt;
+	margin-left: 18.0pt;
+	font-size: 12.0pt;
+	font-weight: medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+LI.Numbered1 {
+	display: block;
+	text-align: left;
+	text-indent: -18.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 0.0pt;
+	margin-left: 18.0pt;
+	font-size: 12.0pt;
+	font-weight: medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+P.TableFootnote {
+	display: block;
+	text-align: left;
+	text-indent: -12.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 18.0pt;
+	margin-left: 30.0pt;
+	font-size: 10.0pt;
+	font-weight: medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+H1.TableTitle, H2.TableTitle, H3.TableTitle, H4.TableTitle, H5.TableTitle, H6.TableTitle {
+	display: block;
+	text-align: center;
+	text-indent: 0.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 0.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 12.0pt;
+	font-weight: Bold;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+H1.Title, H2.Title, H3.Title, H4.Title, H5.Title, H6.Title {
+	display: block;
+	text-align: center;
+	text-indent: 0.0pt;
+	margin-top: 24.0pt;
+	margin-bottom: 12.0pt;
+	margin-right: 0.0pt;
+	margin-left: 0.0pt;
+	font-size: 18.0pt;
+	font-weight: Bold;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+P.TOC-Index-Title {
+	display: block;
+	text-align: left;
+	text-indent: 0.0pt;
+	margin-top: 0.0pt;
+	margin-bottom: 26.0pt;
+	margin-right: 0.0pt;
+	margin-left: 108.0pt;
+	font-size: 26.0pt;
+	font-weight: Bold;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+EM.Code {
+	font-size: 9.0pt;
+	font-weight: Medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+EM.Emphasis {
+	font-style: Italic;
+}
+EM.EquationVariables {
+	font-style: Italic;
+}
+EM.Number {
+	font-weight: bold;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}
+EM.Symbol {
+	font-size: 10.0pt;
+	font-weight: Medium;
+	font-style: Regular;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Verdana", sans-serif;
+}

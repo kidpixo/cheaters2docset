@@ -1,0 +1,780 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<meta name="GENERATOR" content="BBEdit 10" />
+	<link rel="STYLESHEET" href="../help.css" charset="ISO-8859-1" type="text/css" />
+	<title>Searching</title>
+</head>
+<body>
+	<h2>Search Windows</h2>
+	<p class="Body">This section describes TextWrangler's powerful Find and Multi-File Search commands, now enhanced with a flexible file filtering mechanism. It tells you how to search for text in the active window or within a set of files. TextWrangler can also do advanced pattern, or grep, searching. To learn about pattern searching, you should read this section first and then read "<a href="../index_grep.htm">Searching with Grep</a>."</p>
+	<div>
+
+		<h3 id="Windows">The &ldquo;Find&rdquo; and &ldquo;Multi-File Search&rdquo; windows</h3>
+		<p class="Body">The searching interface consists of two parts: a Find window for searching only the front document, and a Multi-File search window for searches which span more than one document (including folders, arbitrary open documents, etc.).</p>
+		<p class="Body">The set of search options which configure how text is actually searched (for single-file searches) has been condensed down to a single pair of options: "Selected text only" and "Wrap around".</p>
+		<ul>
+			<li class="Bullet-List">"Selected text only" affects only the Find All and Replace All operations: if there is a selection range in the front document, these operations will affect search only the contents of the selection range if this option is on, or the entire document (starting from the top) if this option is off.<br /></li>
+			<li class="Bullet-List">"Wrap around" affects only the "Next", "Previous", "Replace", and "Replace &amp; Find" operations: if this option is on and the search reaches the end (or the beginning) of the document, then TextWrangler will continue the search from the appropriate end of the document.</li>
+		</ul>
+		<p class="Body">Keyboard navigation is radically different due to the new windows' modeless nature.</p>
+		<ul>
+			<li class="Bullet-List">Pressing the Return or Enter key with focus in the Find field will perform "Next" in the Find window or "Find All" in the Multi-File Search window.</li>
+			<li class="Bullet-List">Pressing the Escape key will close the window.</li>
+			<li class="Bullet-List">Choosing an appropriate command in the Search menu will trigger the corresponding action in the front Find window.</li>
+			<li class="Bullet-List">TextWrangler supports the following key equivalents to control (toggle) the search options contained in the Find and Multi-File Search windows. The factory default key equivalents for these options are as follows:
+			<br />
+			<br />
+				<table>
+					<tr>
+						<td>Case sensitive</td>
+						<td>Control-shift-N<br /></td>
+					</tr>
+					<tr>
+						<td>Entire word</td>
+						<td>Control-Shift-E<br /></td>
+					</tr>
+					<tr>
+						<td>Grep</td>
+						<td>Control-Shift-G<br /></td>
+					</tr>
+					<tr>
+						<td>Selected text only</td>
+						<td>Control-Shift-S<br /></td>
+					</tr>
+					<tr>
+						<td>Wrap around</td>
+						<td>Control-Shift-W<br /></td>
+					</tr>
+					<tr>
+						<td>Open search history</td>
+						<td>Control-Shift-H<br /></td>
+					</tr>
+					<tr>
+						<td>Open saved patterns</td>
+						<td>Control-Shift-P<br /></td>
+					</tr>
+				</table><br />
+				If these assignments overlap with any keyboard equivalents for clippings that you've set, or if you just wish to change them, you can do so via the "Find Windows" section of the Menus &amp; Shortcuts preference panel.
+			</li>
+		</ul>
+	</div>
+	<div>
+
+		<h3 id="Basics">Basic Searching and Replacing</h3>
+		<p class="Body">This section describes the basic steps for searching and replacing text in a document. Later sections in this chapter cover more advanced techniques. To search and replace text in the front document, follow these steps:</p>
+		<div>
+			<h6 class="Number-First">Choose Find from the Search menu.</h6>
+			<p class="Explain">TextWrangler opens the Find window.</p>
+			<div>
+				<img src="searching-2.gif" height="114" width="325" alt="" />
+			</div>
+			<ol>
+				<li class="Number-List">Type the string you are looking for in the Find text field.</li>
+			</ol>
+			<p class="Explain">You can use special characters in the Find text field to search for tabs, line breaks, or page breaks. See "Special Characters" later in this section.</p>
+			<ol>
+				<li class="Number-List">Type the replace string (if any) in the Replace text field.</li>
+			</ol>
+			<p class="Explain-More">TextWrangler persistently remembers the pairs of search and replace terms that you've most recently used. If you want to repeat a previous search or replace, you can choose the appropriate entry from the Search History popup menu at the right of the Find text field to fill in the Find and Replace fields.</p>
+		</div>
+		<div>
+			<h6 class="Note-Head">Note</h6>
+			<p class="Note-Text">The size of both the search and replace terms is limited only by available memory.</p>
+			<ol>
+				<li class="Number-List">Turn on any options that you want to apply to your search.</li>
+			</ol>
+			<p class="Explain">For more info about these options, see "Search Settings" later in this section.</p>
+			<ol>
+				<li class="Number-List">Click one of the buttons along the right side of the dialog box.</li>
+			</ol>
+			<p class="Body">The following table explains what each of the buttons does.</p>
+			<table>
+				<tr>
+					<th>
+						<p class="CellHeading">This button...</p>
+					</th>
+					<th>
+						<p class="CellHeading">Does this...</p>
+					</th>
+				</tr>
+				<tr>
+					<td>
+						<p class="CellBody">Next</p>
+					</td>
+					<td>
+						<p class="CellBody">Finds the first occurrence of the text in the active window after (below) the current insertion point.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p class="CellBody">Previous</p>
+					</td>
+					<td>
+						<p class="CellBody">Finds the first occurrence of the text in the active window before (above) the current insertion point.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p class="CellBody">Find All</p>
+					</td>
+					<td>
+						<p class="CellBody">Finds all the occurrences of the search string and displays the results in a search results browser.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p class="CellBody">Replace</p>
+					</td>
+					<td>
+						<p class="CellBody">Replaces the current selection with the replace string.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p class="CellBody">Replace All</p>
+					</td>
+					<td>
+						<p class="CellBody">Replaces every occurrence of the search string in the active window with the replace string.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p class="CellBody">Replace &amp; Find</p>
+					</td>
+					<td>
+						<p class="CellBody">Replaces the current selection with the replace string, then finds the next occurrence of the text in the active window.</p>
+					</td>
+				</tr>
+			</table>
+			<p class="Body">Once you've entered a search string (and also, if desired, a replace string), you can also use the commands in the Search menu to find and replace matches (see "Search Menu Reference" later in this section). The table below summarizes the most common commands you can use at this point.</p>
+			<table>
+				<tr>
+					<th>
+						<p class="CellHeading">This command...</p>
+					</th>
+					<th>
+						<p class="CellHeading">Does this...</p>
+					</th>
+				</tr>
+				<tr>
+					<td>
+						<p class="CellBody">Find Next</p>
+					</td>
+					<td>
+						<p class="CellBody">Finds the next occurrence of the search string. To reverse the search direction, hold down Shift.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p class="CellBody">Replace</p>
+					</td>
+					<td>
+						<p class="CellBody">Replaces the selection with the replace string.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p class="CellBody">Replace All</p>
+					</td>
+					<td>
+						<p class="CellBody">Replaces all occurrences of the search string within the document with the replace string.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p class="CellBody">Replace to End</p>
+					</td>
+					<td>
+						<p class="CellBody">Replaces every occurrence of the search string from the current insertion point to the end of the document with the replace string.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p class="CellBody">Replace &amp; Find Again</p>
+					</td>
+					<td>
+						<p class="CellBody">Replaces the selection with the replace string and looks for the search string again.</p>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div>
+
+			<h3 id="Settings">Search Settings</h3>
+			<p class="Body">The checkboxes in the Find window lets you control how TextWrangler searches your document for the indicated text.</p>
+			<div>
+				<h4>Case Sensitive</h4>
+				<p class="Body">When this checkbox is selected, TextWrangler treats upper- and lowercase letters as different letters. Otherwise, TextWrangler treats upper- and lowercase letters as if they were the same.</p>
+			</div>
+			<div>
+				<h4>Entire Word</h4>
+				<p class="Body">When this checkbox is selected, TextWrangler matches the search string only if it is surrounded in the document text by word-break characters (white space or punctuation). Otherwise, TextWrangler matches the search string anywhere in the text.</p>
+			</div>
+			<div>
+				<h4>Grep</h4>
+				<p class="Body">When this checkbox is selected, TextWrangler treats the search and replace strings as grep patterns. Otherwise, TextWrangler searches the document for text that matches the search string as it appears literally, and will replace any matched text with the replace string. To learn more about pattern searching see <a href="../grep.htm" target="_self">Searching with Grep</a>.</p>
+			</div>
+			<div>
+				<h4>Selected Text Only</h4>
+				<p class="Body">When this checkbox is selected, TextWrangler searches only the selected text. Otherwise, TextWrangler searches the entire document.</p>
+			</div>
+			<div>
+				<h4>Wrap Around</h4>
+				<p class="Body">When this checkbox is selected, TextWrangler continues searching from the beginning of the document if a match is not found (or from the end of the document if searching backwards). Otherwise, TextWrangler stops searching when it reaches the end (or the beginning if searching backwards) of the file.</p>
+			</div>
+		</div>
+		<div>
+
+			<h3 id="SpecialCharacters">Special Characters</h3>
+			<p class="Body">You can use the following special characters to search for line breaks and other non-printing characters, as well as hexadecimal escapes to search for any desired 8-bit character.</p>
+			<table>
+				<tr>
+					<th>
+						<p class="CellHeading">Character</p>
+					</th>
+					<th>
+						<p class="CellHeading">Matches...</p>
+					</th>
+				</tr>
+				<tr>
+					<td>
+						<p class="CellBody">\r</p>
+					</td>
+					<td>
+						<p class="CellBody">line break (carriage return)</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p class="CellBody">\n</p>
+					</td>
+					<td>
+						<p class="CellBody">Unix line break (line feed)</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p class="CellBody">\t</p>
+					</td>
+					<td>
+						<p class="CellBody">tab</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p class="CellBody">\f</p>
+					</td>
+					<td>
+						<p class="CellBody">page break (form feed)</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p class="CellBody">\xNN</p>
+					</td>
+					<td>
+						<p class="CellBody">hexadecimal character code NN (for example, \x0D for CR)</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p class="CellBody">\\</p>
+					</td>
+					<td>
+						<p class="CellBody">backslash (\)</p>
+					</td>
+				</tr>
+			</table>
+			<p class="Body">The form of a hex escape is "\xNN", where "N" is any single hex digit [0-9,A-F]. The "x" may be upper or lower case. (You can use the ASCII Table in the Window menu to find the hex value for any 8-bit Macintosh character.) You can perform a literal search for any character, including a null, using this option. Malformed escapes are treated as literal strings.</p>
+			<div>
+				<h6 class="Note-Head">Note</h6>
+				<p class="Note-Text">In older versions of TextWrangler, you could not perform a grep search for a null character (ASCII 0), even if it was escaped. This limitation is no longer present; you can find nulls as part of a grep search.</p>
+			</div>
+		</div>
+	</div>
+	<div>
+
+		<h3 id="MFSBasics">Multi-File Searching</h3>
+		<p class="Body">The main difference between single-file searching and multi-file searching is that to perform a multi-file search, you must specify the files to be searched. TextWrangler gives you a great deal of flexibility in how to do this. You can search all the files in a given folder, in open editing windows, or in an existing search results browser. For even greater control, you can select a diverse set of search sources, or apply TextWrangler's advanced file filtering capabilities.</p>
+		<p class="Body">When you start a search, TextWrangler will display a search progress window and return control, so that you can continue working. You can perform more than one multi-file searches at a time; each search will have its own progress window. Closing a search's progress window or clicking Cancel in the progress window will stop the operation, and TextWrangler will display a search results browser containing any matches found up to that point.</p>
+		<div>
+			<h3>Starting a Search</h3>
+			<p class="Body">To search for a string in multiple files, do the following steps:</p>
+			<div>
+				<h6 class="Number-First">Choose Multi-File Search from the Search menu, or type Command-Shift-F, to open the Multi-File Search window (if it is not already open).</h6>
+				<div>
+					<img src="searching-3.gif" height="254" width="361" alt="" />
+				</div>
+				<ol>
+					<li class="Number-List">Type the string you are looking for in the Find text field.</li>
+					<li class="Number-List">Type the replace string (if any) in the Replace text field.</li>
+				</ol>
+				<p class="Explain">Be sure to read the section "Multi-File Replacing" later in this chapter if you want to perform replace operations.</p>
+				<ol>
+					<li class="Number-List">Turn on any search options that you want to apply to your search.</li>
+				</ol>
+				<p class="Explain">To learn more about these options, see <a href="searching.htm#Settings" target="right">See Search Settings.</a> earlier in this chapter.</p>
+				<ol>
+					<li class="Number-List">Drag a folder to the search target area to search its contents, or select any of the available search sources in the Sources list to specify the set of files to search.</li>
+				</ol>
+				<p class="Explain">See <a href="searching.htm#SearchSet" target="right">Specifying the Search Set</a> later in this chapter for more information.</p>
+				<ol>
+					<li class="Number-List">Click one of the buttons along the right side of the dialog box to begin the search.</li>
+				</ol>
+				<p class="Body">The table below tells you what each of the buttons does.</p>
+				<table>
+					<tr>
+						<th>
+							<p class="CellHeading">This button...</p>
+						</th>
+						<th>
+							<p class="CellHeading">Does this...</p>
+						</th>
+					</tr>
+					<tr>
+						<td>
+							<p class="CellBody">Find All</p>
+						</td>
+						<td>
+							<p class="CellBody">Finds all occurrences of the search string in all the files in the selected search sources. TextWrangler displays the results in a search results browser.</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p class="CellBody">Replace All</p>
+						</td>
+						<td>
+							<p class="CellBody">Finds all occurrences of the search string in all the files in the selected search sources and replaces them with the replace string.</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p class="CellBody">Options</p>
+						</td>
+						<td>
+							<p class="CellBody">Brings up the Search Options sheet.</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p class="CellBody">Save Set</p>
+						</td>
+						<td>
+							<p class="CellBody">Creates an entry under the "Saved Search Sets" heading in the search sources list which you can later choose to reselect the same search sources.</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p class="CellBody">Other</p>
+						</td>
+						<td>
+							<p class="CellBody">Select arbitrary file(s) or folder(s) to add to the search sources.</p>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div>
+
+			<h3 id="MFSResults">Find All and Multi-File Search Results</h3>
+			<p class="Body">When you perform a Find All search, either on a single file or across multiple files, TextWrangler will open a search results browser which lists every occurrence of the search string in the selected file(s)</p>
+			<div>
+				<img src="searching-4.gif" height="236" width="271" alt="" />
+			</div>
+			<p class="Body">The information at the top of the window tells you how many matches TextWrangler found in the set of files you specified, as well as specifying whether there were any error conditions or warnings generated during the search. You can display or hide any combination of errors, warnings, and matches, by checking the appropriate options.</p>
+			<p class="Body">The middle panel lists each line that contains the matched text. Every match is identified by file name and line number. You can toggle between the standard Finder-style hierarchical list, where each match in a file is listed under the file's name, or a flat list where each occurrence is displayed in order, by pressing the File List button next to the Open button.</p>
+			<p class="Body">Click any match in the list of occurrences to have TextWrangler display the part of the file that contains the match in the text pane.</p>
+			<div>
+				<h6 class="Note-Head">IMPORTANT</h6>
+				<p class="Body">With TextWrangler 10, you can edit text directly within a search results browser, or you can double-click any line that contains a match to open the corresponding file at the point of the match.</p>
+				<p class="Body">After you have opened a file, you can use the Find Again, Replace, Replace All, and Replace &amp; Find Again commands in the Search menu to continue searching it, as if you had chosen a File by File search. See the next section for information on File by File searching.</p>
+			</div>
+			<div>
+				<h6 class="Note-Head">Note</h6>
+				<p class="Note-Text">You can use a search results window as the basis of another multi-file search. See "Specifying the Search Set" below.</p>
+			</div>
+		</div>
+		<div>
+
+			<h3 id="SearchSet">Specifying the Search Set</h3>
+			<p class="Body">To specify which files and folders TextWrangler should examine when performing a multi-file search, just select items from the Search In list of the Multi-File Search window.</p>
+			<div>
+				<img src="searching-5.gif" height="278" width="361" alt="" />
+			</div>
+			<p class="Body">You can choose multiple sources for a multi-file search, and you can mix different types of sources. Available sources include:</p>
+			<ul>
+				<li class="Bullet-List">specified individual files</li>
+				<li class="Bullet-List">the files in any selected or recently-searched folder</li>
+				<li class="Bullet-List">open text documents</li>
+				<li class="Bullet-List">the files listed in any results browser (such as a search results browser, an HTML syntax errors browser, or a compile errors browser)</li>
+				<li class="Bullet-List">any "Smart Folders" which you've saved in the Finder (TextWrangler will automatically list any such items present in the "Saved Searches" folder for your login account)</li>
+			</ul>
+			<p class="Body">To add a file, folder, or other suitable item to the Search In list, click Other in the Multi-File Search window, and choose the item using the resulting selection sheet. (You can select multiple items to be added.)</p>
+			<p class="Body">To designate any item in the list as a search source, click on the box next to its name, or double-click on the name, to add a checkmark. To deselect a search source, click the box next to its name, or double-click its name, to turn off the checkmark. To select a single source only, and deselect all other sources, Command-click on the checkbox next to the desired source's name. To remove a search source from the list, click on the minus sign (-) to the right of its name. (Doing so removes only the entry from the list, not the original item.)</p>
+			<p class="Body">TextWrangler will display a summary of the selected sources in the information box at the bottom of the Multi-File Search window. Here are some common scenarios.</p>
+			<div>
+				<h3>Searching the files in a folder</h3>
+				<p class="Body">To search the files in a folder, click on the box next to the folder's name, or double-click its name, in the Sources drawer. If the folder you want to search is not in the Sources drawer, click the Other button at the right of the dialog and pick the folder using the resulting selection sheet.</p>
+				<p class="Body">You can also drag a folder from the Finder directly into the search items box of the Find &amp; Replace dialog to choose it as the source.</p>
+			</div>
+			<div>
+				<h4>Searching all open documents</h4>
+				<p class="Body">You can choose any or all open text documents as search sources. This option allows you to search documents that have not yet been saved to a file, or which contain unsaved changes. To choose all open documents, click the box next to the Open Text Documents item, or double-click on the item in the list.</p>
+			</div>
+			<div>
+				<h4>Searching the files contained in a results browser</h4>
+				<p class="Body">If a previous multi-file search found many files that contain your search string, you may want to narrow the search. To search the files listed in any results browser window, click the box next to that browser's name, or double-click on its name, in the Sources drawer. You can also click the box next to the Results Browsers item, or double-click on this item, to search the files listed in all results browsers.</p>
+			</div>
+			<div>
+				<h6 class="Note-Head">Note</h6>
+				<p class="Note-Text">The Choose a Folder dialog will display any packages it encounters as folders (rather than just as single files, the way they appear in the Finder). This allows you to navigate their internal structure just as you would any other folder. Similarly, you can drag a package from the Finder into the path box in the Find &amp; Replace dialog and it will be treated as a true folder rather than as a single file.</p>
+			</div>
+		</div>
+		<div>
+			<h3>Saved Search Sources</h3>
+			<p class="Body">You can use the Saved Search Sources popup menu to store specific sets of search sources for later reuse. To save a set of search sources, choose Remember this Set from the popup menu and give the set a name in the resulting dialog. To select a saved set of search sources, choose that set's name from the pop-menu.</p>
+		</div>
+		<div>
+
+			<h3 id="MFSOptions">Multi-File Search Options</h3>
+			<p class="Body">Click the Options button to display the search options sheet.</p>
+			<div>
+				<img src="searching-6.gif" height="103" width="308" alt="" />
+			</div>
+			<p class="Body">To search the contents of all subfolders within the folders you choose, select the Search Nested Folders option in the resulting sheet. You can also choose to skip any folders whose names are enclosed in parentheses here by selecting the Skip (...) Folders option, or whether to search the contents of invisible folders by selecting the Search Invisible Folders option.</p>
+			<p class="Body">You can also choose to search only text files or to search all file types. If you have image files or other non-text files in search source folders, it may be a good idea to restrict the search to only text files. This setting is applied in addition to any file filter (see next section) and in fact takes effect before the filter.</p>
+			<p class="Body">To find only files whose contents do not contain the search string, select the Exclude Matches option.</p>
+			<p class="Body">You can further restrict which files from the chosen sources will be searched by applying a file filter. See <a href="searching.htm#FileFilters">File Filters</a> (below) for more details.</p>
+		</div>
+		<div>
+
+			<h3 id="FileFilters">File Filters</h3>
+			<p class="Body">If you do not want to search every file in the set you selected, but want to include only those that meet certain criteria (such as those created on a certain date, or only those created by TextWrangler and not some other program, or those that are HTML or Perl documents), you can use a file filter.</p>
+			<p class="Body">To apply a file filter, just choose it from the Filters popup menu in the Multi-File Search window. If none of the available filters meets your needs, you can define a new one, or create a temporary filter.</p>
+			<div>
+				<h4>New Filter</h4>
+				<p class="Body">To define a new saved file filter, select New... from the popup menu. TextWrangler will ask you for a filter name, and then display the Edit Filter dialog (below). You can also define new file filters in the Filters panel of the Setup window (see "Filters" in Chapter 10 of the PDF manual).</p>
+				<div>
+					<img src="searching-7.gif" height="159" width="308" alt="" />
+				</div>
+			</div>
+			<div>
+				<p class="Body">The Edit Filter dialog lets you specify multiple criteria that determine whether a given file is selected by the filter. You can choose whether these criteria are exclusive (that is, whether a file must meet every listed test to be selected) or inclusive (that is, whether a file that meets any of the tests is selected) using the Every (AND) and Any (OR) radio buttons at the top of the dialog.</p>
+				<p class="Body">To add a test, click More Criteria. A new row appears in the dialog, as shown below.</p>
+				<div>
+					<img src="searching-8.gif" height="159" width="304" alt="" />
+				</div>
+				<p class="Body">The leftmost column lets you specify which attribute of a file you wish to test. TextWrangler lets you test a file's name, the name of its enclosing folder, its creator or type, its creation and modification date (or both date and time), or its Finder label, visibility, or the programming or markup language it is written in. You can also test the content of a file, using the "Contents" criterion.</p>
+				<p class="Body">The middle column lets you choose the test to be applied to the selected attribute. The available options here change depending on what attribute you selected. If you choose Visibility in the first column, for instance, your only choices are whether the file is or is not visible, However, if you choose File Name in the first column, the middle column lets you test to see if the name does or does not exactly match, contain, begin with, or end with a particular string. You can also test file names to see if they match wildcard or Grep patterns.</p>
+			</div>
+			<div>
+				<h6 class="Note-Head">Note</h6>
+				<p class="Note-Text">In wildcard patterns, the asterisk (*) and question mark (?) characters have special meanings. The asterisk matches any number of characters, such that "*.c" matches any file whose name ends with ".c". The question mark matches a single character, so that "foo?" matches "food", fool", "foot", and many other words. Both the asterisk and the question mark can be used anywhere in a wildcard pattern, and any number of either can be used in a single pattern.</p>
+				<p class="Note-Text">Grep patterns, also known as regular expressions, are a powerful method of selecting file names based on classes of text or repeating text. They are covered in great detail in Chapter 8 of the PDF manual.</p>
+				<p class="Body">The right column specifies the match criterion. For example, when filtering by File Name, you type the text you want the name to match, contain, begin with, or end with (or not). When filtering by Language, you choose a supported language from a popup menu.</p>
+			</div>
+			<div>
+				<h6 class="Note-Head">Tip</h6>
+				<p class="Note-Text">To quickly set a match criterion, drag a file from the Finder to a field in the Define File Filter dialog. TextWrangler inserts the appropriate attribute from the dragged file, if possible.</p>
+			</div>
+			<div>
+				<h4>Specifying Time and Date Criteria</h4>
+				<p class="Body">When using a time or date criterion, you can use the special words below to specify dates and times relative to the current date and time.</p>
+				<table>
+					<tr>
+						<th>
+							<p class="CellHeading">Word</p>
+						</th>
+						<th>
+							<p class="CellHeading">Means...</p>
+						</th>
+					</tr>
+					<tr>
+						<td>
+							<p class="CellBody">now</p>
+						</td>
+						<td>
+							<p class="CellBody">current date and time</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p class="CellBody">today</p>
+						</td>
+						<td>
+							<p class="CellBody">midnight on the current date</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p class="CellBody">yesterday</p>
+						</td>
+						<td>
+							<p class="CellBody">current date and time minus 24 hours</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p class="CellBody">tomorrow</p>
+						</td>
+						<td>
+							<p class="CellBody">current date and time plus 24 hours</p>
+						</td>
+					</tr>
+				</table>
+				<p class="Body">You can add any number of criteria using the More Criteria button. To delete the last criterion, click the Fewer Criteria button. To select any single criterion for deletion, press the Option key and click on the desired item. To select multiple continuous criteria, press Option-Shift and drag across the items, or to select discontinuous criteria, press Command-Option and click on the desired items.</p>
+				<p class="Body">Click Save to save the file filter and use it for this search. TextWrangler will ask you to name the filter, and it will then appear in the Filters popup menu in the Find &amp; Replace dialog (and in the Define File Filter dialog). Click Revert to undo any changes you have made to the filter. (Hold the Option key when you click Revert to skip the confirmation alert.)</p>
+			</div>
+			<div>
+				<h4>Filtering by Name</h4>
+				<p class="Body">In order to provide the greatest possible flexibility, TextWrangler offers several different criteria for filtering based on file names</p>
+				<p class="Body">File Name: Tests the complete string corresponding to the file name.</p>
+				<p class="Body">File Name Root: Tests only the "root" portion of the file name. Given a name of the form "foo.txt", the root is the string which occurs before the period, in this case "foo".</p>
+				<p class="Body">File Name Suffix: Tests only the file name suffix. In the above example, the suffix is "txt". Note that the suffix does not include the period.</p>
+			</div>
+			<div>
+				<h4>Temporary Filters</h4>
+				<p class="Body">Choose "(current criteria)" from the popup menu in the Find &amp; Replace dialog to reuse the last set of criteria applied (either from using a saved filter, or from using the Edit button to define criteria). Thus, you can use filter criteria on the fly, without the need to create and store a throwaway filter.</p>
+			</div>
+			<div>
+				<h4>Editing and Deleting Filters</h4>
+				<p class="Body">To edit a file filter you have already defined, choose it from the Filters popup menu, change it as desired, and click Save. Since each filter must have a unique name, saving it will replace the old version of the filter. To delete a filter entirely, visit the Filters panel of the Setup window. (You can also create or modify filters there.)</p>
+			</div>
+		</div>
+	</div>
+	<div>
+		<h3 id="SearchSCMdir">Searching SCM Directories</h3>
+		<p class="Body">When scanning folders for various purposes (multi-file search, Find Differences, and other batch operations), TextWrangler ignores all directories which contain administrative data for source-control management (SCM) tools: CVS, .svn, .git, .hg, .bzr. This behavior prevents any inadvertent modifications to such data which might otherwise occurs during a multi-file search or other batch operation. If you must search the contents of such directories, you can enable TextWrangler to do so by issuing the following Terminal command:</p>
+		<p class="Code">defaults write com.barebones.textwrangler SkipSCMAdminDirsWhenScanningFolders -bool NO</p>
+		<div>
+			<h6 class="Note-Head">Note</h6>
+			<p class="Note-Text">The Live Search bar replaces the Quick Search window present in older versions.</p>
+		</div>
+	</div>
+	<div>
+		<h3 id="MFSReplace">Multi-File Replacing</h3>
+		<p class="Body">If you want to replace only some occurrences of text in multiple files, you can simply search those files, select the instances you want to change in the search results browser to open the files to those points, and perform the replacements individually. However, TextWrangler can also change all occurrences of a string in a group of files with one command.</p>
+		<p class="Body">Globally replacing text in more than one file works the same as replacing it in a single file. The only possible complication is that, if you make a mistake, it can have much wider consequences. If you are not sure what effect a replace operation will have, test it out on a few sample files, or a copy of your data, first!</p>
+		<p class="Body">To do a multi-file search and replace, replacing all occurrences:</p>
+		<div>
+			<h6 class="Number-First">Enter your desired find and replace strings in the Multi-File Search window as described in the section "Multi-File Search."</h6>
+			<ol>
+				<li class="Number-List">Choose the files to be searched as described in <a href="searching.htm#SearchSet" target="right">Specifying the Search Set</a>.</li>
+				<li class="Number-List">To start the operation, Click Replace All in the Multi-File Search window, choose the Replace All command, or type its key equivalent of Command-Option-R.</li>
+			</ol>
+			<p class="Explain">TextWrangler displays the Find &amp; Replace All Matches dialog box:</p>
+			<div>
+				<img src="searching-9.gif" alt="" height="76" width="217" />
+			</div>
+			<p class="Body">This is what each of the options does:</p>
+			<table>
+				<tr>
+					<th>
+						<p class="CellHeading">This option...</p>
+					</th>
+					<th>
+						<p class="CellHeading">Replaces all occurrences of the search string with the replace string and...</p>
+					</th>
+				</tr>
+				<tr>
+					<td>
+						<p class="CellBody">Leave Open</p>
+					</td>
+					<td>
+						<p class="CellBody">Leaves all the files open so that you can inspect the replacements.</p>
+						<p class="CellBody">&nbsp;</p>
+						<p class="CellBody">If there are many files that contain the search string, TextWrangler may run out of memory.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p class="CellBody">Save to Disk</p>
+					</td>
+					<td>
+						<p class="CellBody">Saves each file with the changes.</p>
+						<p class="CellBody">&nbsp;</p>
+						<p class="CellBody">When the Confirm Saves setting is active, you will have an opportunity to approve the changes before TextWrangler saves them to disk. You should not turn this off unless you are sure that the replace operation being done is what you want.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p class="CellBody">Show Results</p>
+					</td>
+					<td>
+						<p class="CellBody">Opens a results browser listing each of the files which was changed, and the number of changes in each file.</p>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div>
+		<h3 id="LiveSearch">Live Search</h3>
+		<p class="Body">The Live Search command performs an incremental search. In other words, it shows the matching text as you type the search string, so you only have to type until you find the text you want.</p>
+		<p class="Body">Live Search always searches in the text view of the frontmost window; if that window has no text view, the Live Search command will be disabled.</p>
+		<p class="Body">To use Live Search:</p>
+		<div>
+			<h6 class="Number-First">Choose Live Search from the Search menu.</h6>
+			<ol>
+				<li class="Number-List">Type the string you are looking for into the Live Search field.
+					<div>
+						<img src="livesearch.png" alt="" height="127" width="315" />
+					</div>
+				</li>
+			</ol>
+			<p class="Explain"> (As you type, TextWrangler selects the first occurrence of what you have typed so far.)</p>
+			<ol>
+				<li class="Number-List">To find the next occurrence of the matching text, click the Next (right) arrow, or type Return or Enter.</li>
+				<li class="Number-List">To find the previous occurrence of the matching text, click the Previous (left) arrow, or type Shift-Return or Shift-Enter.</li>
+			</ol>
+		</div>
+		<p class="Body">If Emacs key bindings are enabled, you can also type Control-S to start a Live Search, and then type Control-S or Control-R to search forward or backward respectively.</p>
+		<p class="Body">To clear the most recent word of the search string, you can type Option-Delete, or click on the "delete" button (the "X") within the search field to delete the entire search string.</p>
+		<p class="Body">To cancel Live Search, you may click the "Done" button in the search bar or type the Escape key.</p>
+		<div>
+			<h6 class="Note-Head">Note</h6>
+			<p class="Note-Text">The Live Search bar replaces the Quick Search window present in older versions.</p>
+		</div>
+	</div>
+	<div>
+
+		<h3 id="CommandReference">Search Menu Reference</h3>
+		<p class="Body">This section describes all of the commands in the Search menu.</p>
+		<div>
+			<h3>Find</h3>
+			<p class="Body">Opens the Find window (or the Find &amp; Replace dialog). See <a href="searching.htm#Basics" target="right">Basic Searching and Replacing</a>.</p>
+		</div>
+		<div>
+			<h3>Multi-File Search</h3>
+			<p class="Body">Opens the Multi-File Search window. See <a href="searching.htm#MFSBasics" target="right">Multi-File Searching</a> and <a href="searching.htm#MFSReplace" target="right">Multi-File Replacing</a>.</p>
+		</div>
+		<div>
+			<h3>Live Search</h3>
+			<p class="Body">Opens the <a href="searching.htm#LiveSearch" target="right">Live Search</a> bar. You can use this feature to interactively search for text strings, as described in the previous section.</p>
+		</div>
+		<div>
+			<h3>Find Next/Previous</h3>
+			<p class="Body">Searches the current document for the next occurrence of the search string. Hold down the Shift key to find the previous occurrence.</p>
+		</div>
+		<div>
+			<h3>Find All</h3>
+			<p class="Body">Finds all instances of the search string in the current document or search set, and displays a search results browser.</p>
+		</div>
+		<div>
+			<h3>Find Selected Text/Previous Selected Text</h3>
+			<p class="Body">Uses the selected text as the search string and finds the next occurrence of the selected text. Hold down the Shift key to find the previous occurrence of the selected text.</p>
+			<p class="Body">When you invoke this command, TextWrangler will add the current search string to its Search History list of recently-used search strings.</p>
+			<div>
+				<h6 class="Note-Head">Tip</h6>
+				<p class="Note-Text">You can also hold down the Option and Command keys as you double-click on a selection to search for the next occurrence of the selected text.</p>
+			</div>
+		</div>
+		<div>
+			<h3>Use Selection for Find</h3>
+			<p class="Body">Sets TextWrangler's search string to the currently selected text but does not perform a search. When you invoke this command, TextWrangler will add the current search &amp; replace strings to its Search History list.</p>
+		</div>
+		<div>
+			<h3>Use Selection for Find (grep)</h3>
+			<p class="Body">When you hold down the Shift key, Use Selection for Find becomes Use Selection for Find (grep). This command sets TextWrangler's search string to the currently selected text and turns on the Grep option, but does not perform a search. When you invoke this command, TextWrangler will add the current search &amp; replace strings to its Search History list.</p>
+		</div>
+		<div>
+			<h3>Use Selection for Replace</h3>
+			<p class="Body">Sets TextWrangler's replace string to the currently selected text but does not perform a search operation. When you invoke this command, TextWrangler will add the current search &amp; replace strings to its Search History list.</p>
+		</div>
+		<div>
+			<h3>Use Selection for Replace (grep)</h3>
+			<p class="Body">When you hold down the Shift key, Use Selection for Replace becomes Use Selection for Replace (grep). This command sets TextWrangler's replace string to the currently selected text and turns on the Grep option, but does not perform a search operation. When you invoke this command, TextWrangler will add the current search&amp; replace strings to its Search History list.</p>
+		</div>
+		<div>
+			<h3>Replace</h3>
+			<p class="Body">Replaces the selected text (usually an occurrence of the search string) with the replace string.</p>
+		</div>
+		<div>
+			<h3>Replace All</h3>
+			<p class="Body">Replaces all occurrences of the search string in a file with the replace string, or, starts a multi-file search &amp; replace operation.</p>
+		</div>
+		<div>
+			<h3>Replace to End</h3>
+			<p class="Body">Replaces each occurrence of the search string from the current insertion point (or the start of the current selection range) to the end of the document.</p>
+		</div>
+		<div>
+			<h3>Replace &amp; Find Again</h3>
+			<p class="Body">Replaces the selected text with the replace string and searches for the next occurrence of the search string.</p>
+		</div>
+		<div>
+			<h3>Go to Line</h3>
+			<p class="Body">When you choose this command, TextWrangler opens the Go To Line dialog box. Type in a line number and the frontmost text window will jump to display that line.</p>
+			<div>
+				<h6 class="Note-Head">Note</h6>
+				<p class="Note-Text">The Go To Line command honors the "Use `Hard' Line Numbering in Soft-Wrapped Text Views" option in the Editing preference panel.</p>
+			</div>
+		</div>
+		<div>
+			<h3>Go to Center Line</h3>
+			<p class="Body">Will move the insertion point to the beginning of the middle or center line of the displayed text.</p>
+		</div>
+		<div>
+			<h3>Go to Previous/Next Error</h3>
+			<p class="Body">If an error browser is open, this command will open the listed error which came before or after the selected error. See Chapter 9 for more information on error browsers.</p>
+		</div>
+		<div>
+			<h3>Go to Function Start/End</h3>
+			<p class="Body">When you choose one of these commands, TextWrangler will move the insertion point to a position immediately before the start or immediately after the end of the current function, where a function is any item which appears on the function popup menu. If you anticipate using these commands often, you may wish to assign them key equivalents in the Menus &amp; Shortcuts preference panel.</p>
+		</div>
+		<div>
+			<h3>Go to Previous/Next Function</h3>
+			<p class="Body">When you choose one of these commands, TextWrangler will select the name of the previous or next function in the document, where a function is any item which appears on the function popup menu. If you anticipate using these commands often, you may wish to assign them key equivalents in the Menus &amp; Shortcuts preference panel.</p>
+		</div>
+		<div>
+			<h3>Jump Back</h3>
+			<p class="Body">When you choose this command, TextWrangler will go to the last selection you made in the document which was outside the current view (an automatic jump mark), or the last location you marked with the Set Jump Mark command (a manual jump mark--see below).</p>
+		</div>
+		<div>
+			<h3>Jump Forward</h3>
+			<p class="Body">When you choose this command after choosing Jump Back, TextWrangler will go to the next later jump mark, or return to the most recent position of the insertion point. If you have not jumped back to a jump mark, this command is disabled.</p>
+		</div>
+		<div>
+			<h3>Set Jump Mark</h3>
+			<p class="Body">Choose this command to define the current insertion point location or selection range as a manual jump mark within the active document. You can navigate to jump marks using the Jump Back and Jump Forward commands.</p>
+		</div>
+		<div>
+			<h3>Find Differences</h3>
+			<p class="Body">Finds the differences between two files, or all of the files contained in two folders. See "Comparing Text Files" in Chapter 4 of the user manual for more details.</p>
+		</div>
+		<div>
+			<h3>Compare Two Front Documents</h3>
+			<p class="Body">Performs a Find Differences on the two frontmost text documents.</p>
+		</div>
+		<div>
+			<h3>Compare Against Disk File</h3>
+			<p class="Body">Performs a Find Differences between the contents of the front document and the disk file for that same document. This capability makes it easy to locate in-progress changes to a document.</p>
+		</div>
+		<div>
+			<h3>Apply to New</h3>
+			<p class="Body">Applies the currently selected difference to the "New" version of two files which are being compared. See "Comparing Text Files" in Chapter 4 of the user manual for more details.</p>
+		</div>
+		<div>
+			<h3>Apply to Old</h3>
+			<p class="Body">Applies the currently selected difference to the "Old" version of two files which are being compared. See "Comparing Text Files" in Chapter 4 of the user manual for more details.</p>
+		</div>
+		<div>
+			<h3>Compare Again</h3>
+			<p class="Body">Find the differences between two files, using the same settings that were used in the last time you used the Find Differences command. See "Comparing Text Files" in Chapter 4 of the user manual for more details.</p>
+		</div>
+		<div>
+			<h3>Find Definition</h3>
+			<p class="Body">Looks up definitions for the selected word using ctags information if available. If there is no selection, TextWrangler will attempt to determine the symbol name by inspection of the text around the insertion point, rather than requiring you to type a name. (See "Exuberant Ctags" in Chapter 14 of the PDF manual for more details about working with ctags.)</p>
+		</div>
+		<div>
+			<h3>Find in Reference</h3>
+			<p class="Body">Performs a search for the selected symbol using an appropriate language-specific online resource. As for Find Definition, if there is no selection, TextWrangler will attempt to determine the symbol name by inspection around the insertion point.</p>
+			<p class="Body">For example, Find in Reference in a PHP document will look up the selected symbol on php.net; in a Ruby document, it will use the `ri' interactive reference; in a Unix Shell Script, it will open the appropriate Unix man page.</p>
+			<p class="Body">For languages which don't have a pre-defined resources, lookups will performed on the Apple Developer Connection web site.</p>
+			<p class="Body">You can modify the URL template which TextWrangler uses to perform the lookup for a particular language by adding a custom configuration for that language in the Languages preference panel and editing the template directly. In the template, use "__SYMBOLNAME__" to indicate where the selected symbol name should be placed in the lookup string.</p>
+		</div>
+	</div>
+</body>
+</html>
