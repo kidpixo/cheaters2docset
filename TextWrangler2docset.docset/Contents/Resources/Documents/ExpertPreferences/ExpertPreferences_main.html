@@ -1,0 +1,341 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <link rel="STYLESHEET" href="../help.css" charset="ISO-8859-1" type="text/css" />
+    <title>TextWrangler Expert Preferences</title>
+    <meta name="generator" content="BBEdit 10" />
+</head>
+<body>
+    <div>
+        <h3>TextWrangler Expert Preferences</h3>
+        <p class="Body">There are a number of behaviors in TextWrangler for which there are no UI controls in the Preferences window; this is typically because the settings are so obscure that placing them in the Preferences window would just make it complicated. In fact, some of these settings <em>were</em> in the Preferences window, and have been removed in order to simplify the interface; in such cases, any changes you made previously will be honored, even though the UI in the Preferences window is gone.</p>
+        <p class="Note-Text"><strong>Note:</strong> Adjusting the settings described here involves using the Unix command line (in the Terminal or a suitable replacement). Most changes will not have any immediate visible effect, but will instead take effect the next time you perform a relevant action, or, at the latest, after quitting and restarting TextWrangler.</p>
+        <hr />
+        <h4>Editing</h4>
+        <ul>
+            <li>
+                <p class="Body">TextWrangler supports "camel case" navigation: press Control-left-arrow or Control-right-arrow to jump to the next (or previous) transition from lower-case to upper-case characters (or a word boundary, whichever comes first).</p>
+                <p class="Body">Note that this use of Control-left-arrow and Control-right-arrow replaces the pre-8.5 behavior of using these key combinations to scroll horizontally. If you prefer the old behavior, you can do the following from the command line:</p>
+                <p class="Code">defaults write com.barebones.textwrangler Editor_ControlArrowCamelCase -bool NO</p>
+                <p class="Code">defaults write com.barebones.textwrangler Editor_ControlArrowHScroll -bool YES</p>
+            </li>
+            <li>
+            	<p class="Body">When you backspace from the insertion point, TextWrangler will delete a tab stop's worth of spaces if there are only spaces (and tabs) between the insertion point and the start of the line on which you're editing. This may be disabled by an expert preference if desired:</p>
+				<p class="Code">defaults write com.barebones.textwrangler Editor_DeleteIndentationWhitespaceToTabStop -bool NO</p>
+			</li>
+			<li>			
+				<p class="Body">Automatic word counting is disabled for documents over a set size threshold, in order to avoid needless delays when working on very large documents. The factory default is 16M characters, but you may change this limit as desired using the following expert preference:</p>
+				<p class="Code">defaults write com.barebones.textwrangler Editor_AutoWordCountSizeThreshold -int 16777216</p>
+				<p class="Code"># Setting it to zero disables the limit check entirely.</p>
+			</li>
+            <li>
+                <p class="Body">Since "Find All Misspelled Words" is pretty much pointless on files over a certain size, the maximum amount of text checked by this command is limited to 1M (1024 squared) characters. This may be adjusted with an expert preference:</p>
+				<p class="Code-Last">defaults write com.barebones.textwrangler Editor_SpellCheckLengthLimit -int NN</p>
+				<p class="Body">where "NN" is some decimal value. Use <code>-int 0</code> to suppress the limit altogether.</p>
+			</li>
+			<li>
+                <p class="Body">Text completions that depend on examining the document's contents (both for tokens in the document, and for possible completions from the system spelling checker) are now skipped when the document is above a certain size. The cutoff can be adjusted:</p>
+				<p class="Code-Last">defaults write com.barebones.textwrangler MaxDocumentLengthForCompletionTokenizer -int N</p>
+				<p class="Body">where "NN" is some decimal value. Use <code>-int 0</code> to suppress the limit altogether.</p>
+			</li>
+			<li>
+				<p class="Body">By default, the "Balance" command (or double-clicking on a delimiter to balance) does not include the delimiters in the resulting selection. If you would like for it to do so:</p>
+				<p class="Code">defaults write com.barebones.textwrangler BalanceIncludesDelimiters -bool YES</p>
+			</li>
+			<li>
+				<p class="Body">When using the Un/Comment command, TextWrangler will use the line comment delimiter for the document's language whenever possible. If you would prefer to use block comments whenever possible:</p>
+				<p class="Code">defaults write com.barebones.textwrangler PreferLineCommentsWhenCommenting -bool NO</p>
+			</li>
+			<li>
+				<p class="Body">When using the Un/Comment command, if nothing is selected, TextWrangler will use the line comment delimiter to comment (or uncomment) the entire line. If you would prefer that TextWrangler insert the line-comment delimiter at the insertion point instead:</p>
+				<p class="Code">defaults write com.barebones.textwrangler CommentWholeLineWithInsertionPoint -bool NO</p>
+			</li>
+        </ul>
+        <hr />
+        <h4>FTP/SFTP</h4>
+        <ul>
+            <li>
+                <p class="Body">Settings are available for disabling passive FTP, in order to deal with hosts that misbehave when sent the <code>PASV</code> command.</p>
+                <p class="Body">Passive FTP can be disabled per host, per domain, or globally:</p>
+                <p class="Code"># only for "foobar.example.com"</p>
+                <p class="Code">defaults write com.barebones.textwrangler DisablePassiveFTP:foobar.example.com -bool YES</p>
+                <p class="Code"># only for servers in "example.com"</p>
+                <p class="Code">defaults write com.barebones.textwrangler DisablePassiveFTP:example.com -bool YES</p>
+                <p class="Code"># global preference</p>
+                <p class="Code-Last">defaults write com.barebones.textwrangler DisablePassiveFTP -bool YES</p>
+                <p class="Body">Our recommendation is that you disable per host in preference to globally or per-domain.</p>
+            </li>
+            <li>
+                <p class="Body">Some servers don't work correctly when SSH compression is enabled. To work around this, SSH compression can be disabled per host, per domain, or globally:</p>
+                <p class="Code"># only for "foobar.example.com"</p>
+                <p class="Code-Last">defaults write com.barebones.textwrangler EnableSSHCompression:foobar.example.com -bool NO</p>
+                <p class="Code"># only for servers in "example.com"</p>
+                <p class="Code-Last">defaults write com.barebones.textwrangler EnableSSHCompression:example.com -bool NO</p>
+                <p class="Code"># global preference</p>
+                <p class="Code-Last">defaults write com.barebones.textwrangler EnableSSHCompression -bool NO</p>
+                <p class="Body">Our recommendation is that you disable per host in preference to globally or per-domain.</p>
+            </li>
+            <li>
+                <p class="Body">Most of the time, the default timeout for connecting to an SFTP server will suffice; however, if the server is heavily loaded it may take longer to respond. To adjust the SFTP connection timeout:</p>
+                <p class="Code"># set the timeout to 20 seconds -- note that "-int" is required</p>
+                <p class="Code">defaults write com.barebones.textwrangler SFTPConnectionTimeout -int 20</p>
+            </li>
+        </ul>
+        <hr />
+        <h4>File Comparison</h4>
+        <ul>
+            <li>
+                <p class="Body">To control whether TextWrangler hides palettes when arranging windows after a Find Differences operation:</p>
+                <p class="Code">defaults write com.barebones.textwrangler DifferencesResults_HidePalettes -bool YES</p>
+            </li>
+            <li>
+                <p class="Body">To control whether TextWrangler keeps the differences results and document windows arranged when clicking on an item in a differences window:</p>
+                <p class="Code">defaults write com.barebones.textwrangler DifferencesResults_KeepWindowsArranged -bool YES</p>
+            </li>
+            <li>
+                <p class="Body">When comparing text files, TextWrangler will canonicalize RCS keywords to their unexpanded state, so that the values of RCS keywords are not significant to the differences calculations. If you wish, you can disable this, so that any chance in the RCS keywords on a line will cause the line to appear in the differences:</p>
+                <p class="Code"># Ignore variances in RCS keyword values when comparing</p>
+                <p class="Code">defaults write com.barebones.textwrangler Diff_IgnoreRCSKeywords -bool NO</p>
+            </li>
+        </ul>
+        <hr />
+        <h4>Interacting with Other Applications</h4>
+        <ul>
+            <li>
+                <p class="Body">By default, TextWrangler will open AppleScript files using whatever application the OS claims is capable of doing so. If you wish to override this, change the "ScriptEditorBundleID" preference to the bundle ID of your preferred script editor. For example, to set the script editor to Script Debugger:</p>
+                <p class="Code">defaults write com.barebones.textwrangler ScriptEditorBundleID com.latenightsw.ScriptDebugger</p>
+            </li>
+            <li>
+                <p class="Body">TextWrangler will use Affrus for Perl debugging by default (assuming that you have Affrus installed), but if desired you can turn this off:</p>
+                <p class="Code">defaults write com.barebones.textwrangler UseAffrusForPerlDebugging -bool NO</p>
+            </li>
+            <li>
+            	<p class="Body">The "Run in Terminal" and "Go Here in Terminal" commands will use Apple's "Terminal" application by default. If you would like to use a different one:</p>
+       			<p class="Code">defaults write com.barebones.textwrangler TerminalBundleID -string "com.example.TerminalAppBundleID"</p>
+       			<p class="Body">(Use the actual terminal's bundle ID in place of "com.example.TerminalAppBundleID"&hellip;)</p>
+       		</li>
+        </ul>
+        <hr />
+        <h4>Language Support</h4>
+        <ul>
+        	<li>
+        		<p class="Body">If you like, you can set the default language for new untitled documents:</p>
+        		<p class="Code-Last">defaults write com.barebones.textwrangler DefaultLanguageNameForNewDocuments -string "&lt;language name&gt;"</p>
+        		<p class="Body">"<code>&lt;language name&gt;</code>" should be the name of a language shown as installed in the Language preferences. For example, if you want your new documents to be Markdown:</p>
+        		<p class="Code">defaults write com.barebones.textwrangler DefaultLanguageNameForNewDocuments -string "Markdown"</p>
+        	</li>
+            <li>
+                <p class="Body">Most of the factory supplied language modules generate fold ranges for any brace-delimited block that has at least one line, but to reduce noise, only block folds that have at least four lines are shown in editing windows. You can adjust this from the command line, using a language-specific preference key, which consists of "MinimumLinesForBlockFold_" (note the underscore) and the language name; for example:</p>
+                <p class="Code">defaults write com.barebones.textwrangler MinimumLinesForBlockFold_Objective-C</p>
+                <p class="Code">defaults write com.barebones.textwrangler MinimumLinesForBlockFold_Objective-C++ 4</p>
+                <p class="Code">defaults write com.barebones.textwrangler MinimumLinesForBlockFold_JavaScript 4</p>
+            </li>
+            <li>
+            	<p class="Body">The C/C++/ObjC/ObjC++ language modules will generate entries in the function popup menu for prototypes (including forward declarations in classes, and some other constructs). If you don't wish to see these entries, you can turn them off:</p>
+                <p class="Code">defaults write com.barebones.textwrangler FunctionMenuShowFunctionPrototypes -bool NO</p>
+                <p class="Code">#do not include function prototypes in the menu</p>
+            </li>
+            <li>
+            	<p class="Body">By default, items on the function popup menu are sorted by the order of their appearance in the file, and you can hold down the Shift key when clicking on the current function display to sort them by name instead. You can reverse the behaviors but setting sort-by-name as the default, in which case holding the Shift key down will sort the function menu by order in the file:</p>
+				<p class="Code">defaults write com.barebones.textwrangler FunctionMenuSortItemsByName -bool YES #sort the menu by name</p>
+            </li>
+            <li>
+            	<p class="Body">Here are some language-specific settings for PHP. The settings with "Opaque" in their names refer to how certain structures are treated when scanning PHP code that's embedded in HTML; when the preference is YES (the factory default in most cases), the corresponding structure is skipped so that any syntactic elements within it are ignored. When the preference is NO, the comment/string/etc delimiters are ignored and the structure's contents are interpreted. (This is generally not desirable, but currently preserved for legacy compatibility.)</p>
+            	<p class="Code">defaults write com.barebones.textwrangler OpaqueStrings_PHP -bool NO</p>
+ 				<p class="Code">defaults write com.barebones.textwrangler OpaqueBlockComments_PHP -bool NO</p>
+    			<p class="Code">defaults write com.barebones.textwrangler OpaqueLineComments_PHP -bool NO</p>
+	          	<p class="Code-Last">defaults write com.barebones.textwrangler OpaqueHereDoc_PHP -bool NO</p>
+            	<p class="Body">If you want variables to appear in the function menu in PHP documents:</p>
+            	<p class="Code">defaults write com.barebones.textwrangler ShowVariablesInFunctionList_PHP -bool YES</p>
+            </li>
+        </ul>
+        <hr />
+        <h4>Reading and Writing Files</h4>
+        <ul>
+            <li>
+                <p class="Body">TextWrangler ordinarily recognizes image files as images, and will open them into image windows (or ignore them when filtering for text files). To have images possibly treated as text files (which can be potentially dangerous):</p>
+                <p class="Code">defaults write com.barebones.textwrangler QuickTimeImages -bool NO</p>
+            </li>
+            <li>
+                <p class="Body">By default, PDFs are considered text files and so may be opened and searched along with all other text files. To have PDFs treated as a special file type (they will be ignored for any operation that requires a text file):</p>
+                <p class="Code">defaults write com.barebones.textwrangler OpenPDFsAsText -bool NO</p>
+            </li>
+            <li>
+                <p class="Body">To control whether TextWrangler warns you when opening a malformed UTF-8 file:</p>
+                <p class="Code">defaults write com.barebones.textwrangler WarnMalformedUTF8 -bool YES</p>
+            </li>
+            <li>
+                <p class="Body">Ordinarily, TextWrangler will only ask you to choose a file's encoding when it can't otherwise figure out what the encoding is, and your "if the file's encoding can't be guessed" preference is a UTF-8 or UTF-16 variant. This should be fine for general use, but if for some reason you <em>always</em> want TextWrangler to ask you when it can't guess a file's encoding, even if your preference would do the job, you can:</p>
+                <p class="Code">defaults write com.barebones.textwrangler AskForUnguessableFileEncoding -bool YES</p>
+            </li>
+            <li>
+                <p class="Body">Beginning with version 3.5, TextWrangler stores document state (window position and various settings) in a central repository in your TextWrangler preferences folder. If you wish, you can ask TextWrangler to store document state in the resource fork of the document's file:</p>
+                <p class="Code">defaults write com.barebones.textwrangler UseResourceForkForDocumentState -bool YES</p>
+            </li>
+            <li>
+                <p class="Body">By default, TextWrangler will not store document state for documents located in any of the canonical locations for temporary files. (This also includes the "svn-commit.tmp" files used for Subversion commits.) If desired, you can change this::</p>
+                <p class="Code">defaults write com.barebones.textwrangler SaveDocumentStateForTempFiles -bool YES</p>
+            </li>
+            <li>
+                <p class="Body">By default, TextWrangler will avoid writing extended attributes (HFS Type/Creator) to volumes which don't natively support them (i.e. to avoid creating the ._FILE) when it is safe to do so (i.e. we'll be able to re-open the document correctly later.) If desired, you can fine-tune this behavior:</p>
+                <p class="Code-Last">defaults write com.barebones.textwrangler WriteExtendedAttributes <i>&lt;value&gt;</i></p>
+                <p class="Body">&ldquo;<i>value</i>&rdquo; should be one of the following:</p>
+                <ul>
+                    <li>
+                        <p class="Body"><em>Always</em>: Always write the HFS file type and creator (the pre-8.6 behavior)</p>
+                    </li>
+                    <li>
+                        <p class="Body"><em>Never</em>: Never set the HFS file type and creator (even if the document&rsquo;s volume supports it).</p>
+                    </li>
+                    <li>
+                        <p class="Body"><em>Smart</em>: Write HFS file type and creator only if the document&rsquo;s volume supports it</p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p class="Body">For text documents whose size exceeds a certain threshold (expressed in bytes, factory default 1MB), TextWrangler will ignore the Soft Wrap Text preference and leave wrapping off in order to improve the performance of opening very large files. The threshold may be adjusted if desired:</p>
+                <p class="Code-Last">defaults write com.barebones.textwrangler Editor_SoftWrapLengthThreshold -int 1048576</p>
+                <p class="Body">If you set the limit to zero, TextWrangler will always honor the Soft Wrap Text preference, even in situations where soft-wrapping a large file may cause it to take a very long time to open.</p>
+            </li>
+        </ul>
+        <hr />
+        <h4>Sleep and Auto-Save</h4>
+        <ul>
+            <li>
+                <p class="Body">Document auto-save (for crash recovery) is on by default, with a save interval of one minute. To change either setting:</p>
+                <p class="Code">defaults write com.barebones.textwrangler EnableAutoSave_v2 -bool YES</p>
+                <p class="Code">defaults write com.barebones.textwrangler AutoSaveIntervalInMinutes_v2 -int 10</p>
+            </li>
+            <li>
+                <p class="Body">The "Sleep" command does not save any documents in place, since it creates an auto-save file for any open documents with unsaved changes. However, if you want TextWrangler to save any titled (i.e. opened from an existing file) documents to disk before sleeping, you can do so as follows:</p>
+                <p class="Code">defaults write com.barebones.textwrangler SaveTitledDocumentsBeforeSleeping -bool YES</p>
+            </li>
+            <li>
+                <p class="Body">TextWrangler provides control over whether documents on remote servers (FTP/SFTP) or unmounted volumes are opened when automatically reopening documents at application startup. You can modify its behavior with these settings:</p>
+                <p class="Code">defaults write com.barebones.textwrangler AllowVolumeMount -bool YES</p>
+                <p class="Code"># If set to NO, TextWrangler will not attempt to mount a volume</p>
+                <p class="Code-Last"># containing a document it wants to reopen. defaults to YES.</p>
+                <p class="Code">defaults write com.barebones.textwrangler ReopenRemoteDocuments -bool YES</p>
+                <p class="Code"># If set to NO, TextWrangler will not attempt to open any documents</p>
+                <p class="Code-Last"># that were opened from FTP/SFTP servers. Defaults to YES.</p>
+                <p class="Code">defaults write com.barebones.textwrangler PromptToReopenRemoteDocuments - bool YES</p>
+                <p class="Code"># If set to YES (the default), TextWrangler will prompt to give you the </p>
+                <p class="Code"># opportunity to skip remote documents.</p>
+                <p class="Code"># If set to NO, TextWrangler will open remote documents without</p>
+                <p class="Code"># asking, if ReopenRemoteDocuments is set to YES. </p>
+                <p class="Code"># Has no effect if ReopenRemoteDocuments is set to NO.</p>
+            </li>
+        </ul>
+        <hr />
+        <h4>Text Display and Coloring</h4>
+		<ul>
+			<li>
+				<p class="Body">Whether or not TextWrangler uses font smoothing (anti-aliasing) may be adjusted separately for fixed-width and for proportional fonts:</p>
+				<p class="Code">defaults write com.barebones.textwrangler FixedWidthFontSmoothingThreshold -int 10</p>
+				<p class="Code-Last">defaults write com.barebones.textwrangler FontSmoothingThreshold -int 4</p>
+				<p class="Body">The factory default smoothing thresholds are 10pt for fixed width fonts, and 4pt for proportional fonts, respectively. Font sizes above the specified threshold are smoothed; font sizes below the threshold are not.</p>
+			</li>
+			
+			<li>
+				<p class="Body">By default, TextWrangler uses separate colors for HTML/XML attribute names and for their values. If you prefer a single color for all parts of a tag:</p>
+				<p class="Code">defaults write com.barebones.textwrangler UseDistinctColorsForHTMLAttributesAndValues -bool NO</p>
+			</li>
+		</ul>
+        <hr />
+        <h4>Text Search and Replace</h4>
+        <ul>
+            <li>
+                <p class="Body">Like many Mac OS X applications, TextWrangler supports the "Find Scrap", a feature of the OS that enables sharing of the "search for" string between applications. Some applications put inappropriate content (such as Web search strings) on the Find Scrap, which can cause the "search for" string in TextWrangler's Find dialog to be replaced when you didn't expect it.</p>
+                <p class="Body">To tell TextWrangler not to import the Find Scrap into its Find window, nor to export the "search for" string to the Find Scrap:</p>
+                <p class="Code">defaults write com.barebones.textwrangler FindDialog_UsesFindScrap -bool NO</p>
+            </li>
+            <li>
+                <p class="Body">Ordinarily, TextWrangler will color the search and replace patterns in the Find window. To disable coloring of these patterns:</p>
+                <p class="Code">defaults write com.barebones.textwrangler FindDialog_ColorGrepSyntax -bool NO</p>
+            </li>
+            <li>
+            	<p class="Body">The Live Search bar is not visible by default, but appears when you choose "Live Search" from the Search menu. If you would like the Live Search bar to be visible in each new document that you create or open:</p>
+            	<p class="Code">defaults write com.barebones.textwrangler Editor_AlwaysOpenQuickFind -bool YES</p>
+            </li>
+            <li>
+            	<p class="Body">When performing a single-file "Replace All" operation, TextWrangler will show a confirmation sheet showing the number of replacements performed. If you would prefer not to see this confirmation, you can suppress it:</p>
+            	<p class="Code">defaults write com.barebones.textwrangler ReportReplaceAllResults -bool NO</p>
+            </li>
+            <li>
+            	<p class="Body">If you want to amaze and impress your friends and family with just how fast TextWrangler's Replace All is, there's an expert preference for that:</p>
+            	<p class="Code-Last">defaults write com.barebones.textwrangler ReplaceAllResultsIncludeTiming -bool YES</p>
+            	<p class="Body">When turned on, the sheet (or growl notification) will display the amount of time required for the Replace All operation.</p>
+            </li>
+        </ul>
+        <hr />
+        <h4>Windows and UI Tweaking</h4>
+        <ul>
+        	<li>
+        		<p class="Body">By default, an editing window opens with the file list hidden, and automatically makes it visible when you open a second document into the same window. If you would prefer for the file list to always stay hidden:</p>
+        		<p class="Code">defaults write com.barebones.textwrangler AutoShowFileList -bool NO</p>
+        	</li>
+        	
+        	<li>
+        		<p class="Body">On the other hand, if you want the file list to <em>always</em> be visible when you make a new editing window, you can do that as well:</p>
+        		<p class="Code">defaults write com.barebones.textwrangler AlwaysShowFileList -bool YES</p>
+        	</li>
+        	
+        	<li>
+        		<p class="Body">When using the "Previous Document" and "Next Document" commands on the View menu, or the navigation arrows in the navigation bar, the order in which TextWrangler navigates documents is determined by the order in which they were opened. If you prefer, these commands can be made to navigate the documents in the order shown in the file list.</p>
+        		<p class="Code">defaults write com.barebones.textwrangler SurfNextPreviousInDisplayOrder -bool YES</p>
+        	</li>
+            <li>
+                <p class="Body">TextWrangler attempts to move windows as little as possible when you zoom them. To override this and let TextWrangler place the window in the upper left-hand corner of the screen:</p>
+                <p class="Code">defaults write com.barebones.textwrangler ZoomWindowsInPlace -bool NO</p>
+            </li>
+            <li>
+            	<p class="Body">When entering full screen mode, document windows are now sized to the same width as they were before entering full screen mode, which preserves the "distraction free" semantics of full screen mode. If you prefer that a window in full-screen mode always occupy the entire display width, then you may do so:</p>
+            	<p class="Code">defaults write com.barebones.textwrangler FullScreenWindowsHogScreen -bool YES</p>
+            </li>
+            <li>
+                <p class="Body">The "Remember the ... most recently used items" setting in the Application preferences applies to all item types. So, if it's set to 15, TextWrangler will remember 15 text documents, 15 folders, 15 images, and so on. If you want finer control, you can construct an expert pref using the name of the document type as it appears in the menu (and if that name contains spaces, you'll need to quote it). So, for example, if you only wanted to remember the ten most recent folders:</p>
+                <p class="Code"># remember only the ten most recent folders</p>
+                <p class="Code-Last">defaults write com.barebones.textwrangler NSRecentDocumentsLimit:Folders -int 10</p>
+                <p class="Body">Or only the most recent shell worksheet:</p>
+                <p class="Code"># remember only the most recent worksheet</p>
+                <p class="Code-Last">defaults write com.barebones.textwrangler "NSRecentDocumentsLimit:Shell Worksheets" -int 1</p>
+                <p class="Body">If you don't want to remember any recent documents of a particular type (they won't appear in the menu, either), you can set its limit to zero:</p>
+                <p class="Code"># don't remember any images</p>
+                <p class="Code-Last">defaults write com.barebones.textwrangler NSRecentDocumentsLimit:Images -int 0</p>
+                <p class="Body">You can also control the number of items shown in the &ldquo;Most Recently Used&rdquo; group:</p>
+                <p class="Code"># Show up to 15 items in the &ldquo;Most Recently Used&rdquo; group:</p>
+                <p class="Code-Last">defaults write com.barebones.textwrangler MostRecentItemsGroupLimit -int 15</p>
+                <p class="Body">Note that when setting any recent items limit, you <strong>must</strong> set it as an integer, using "<code>-int &lt;some number&gt;</code>".</p>
+                <p class="Body">By default, TextWrangler does not remember recent items opened from any of the canonical locations for temporary files. (This also includes the "svn-commit.tmp" files used for Subversion commits.) If desired, you can change this:</p>
+                <p class="Code">defaults write com.barebones.textwrangler RecentItems_RememberTempFiles -bool YES</p>
+            </li>
+            <li>
+            	<p class="Body">TextWrangler will warn you when opening a larger-than-normal number of items, just in case that isn't what you intended to do. The threshold can be adjusted:</p>
+            	<p class="Code-Last">defaults write com.barebones.textwrangler LotsOfFilesThreshold -int 24</p>
+              <p class="Body">Note that when setting this limit, you <strong>must</strong> set it as an integer, using "<code>-int &lt;some number&gt;</code>". Use "<code>-int 0</code>" to suppress the warning entirely.</p>
+            </li>
+            <li>
+            	<p class="Body">By default, TextWrangler calibrates the vertical scrollbar so that the last line in the document is at the bottom of the window. If you wish, you can configure it to leave space after the last line, either half of the window's height or all of the window's height (less one line, so that the last line in the document is at the top of the window when scrolled all the way to the end). To set this:
+            	</p>
+            	<p class="Code"># half of the window height</p>
+            	<p class="Code">defaults write com.barebones.textwrangler ExtraSpaceInTextViews -string "EShp"</p>
+            	<p><p class="Code"># all of the window height, less one line</p>
+            	<p class="Code">defaults write com.barebones.textwrangler ExtraSpaceInTextViews -string "ESfp"</p>
+            	<p><p class="Code"> # no extra space (factory default)</p>
+            	<p class="Code-Last">defaults write com.barebones.textwrangler ExtraSpaceInTextViews -string "ESNo"</p>
+            </li>
+        </ul>
+        <hr />
+        <h4>Miscellaneous</h4>
+        <ul>
+            <li>
+            	<p class="Body">When searching for matches, Open File by Name limits the number of matches to a reasonable maximum. The factory default is 200, and may be adjusted:</p>
+            	<p class="Code">defaults write com.barebones.textwrangler OpenByNameMaxWildcardMatches -int 200</p>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
