@@ -1,0 +1,2065 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>PostgreSQL 9.0 Cheat Sheet</title>
+	<link type="text/css" rel="stylesheet" href="css/cheaters.css"/>
+<script src="javascripts/jquery.min.js"></script>
+<script src="javascripts/smooth_scrolling.lopash.js"></script>
+<script src="javascripts/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+
+<h1 id="postgresql9.0cheatsheet">PostgreSQL 9.0 Cheat Sheet</h1>
+
+<p><a href="http://www.postgresonline.com/special_feature.php?sf_name=postgresql90_cheatsheet&amp;outputformat=html">Permalink to PostgreSQL 9.0 Cheat Sheet</a>
+<br/>
+<a href="http://fuckyeahmarkdown.com/">HTML to Markdowd by fuckyeahmarkdown</a></p>
+
+<p>We cover only a subset of what we feel are the most useful constructs that we could squash in a single cheatsheet page commonly used </p>
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;" colspan="2">Common Built-in Data Types</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;" colspan="2">Below are common data types with common alternative names.<br/>Note: There are many more and one can define new types with create type. <br/>All table structures create an implicit type struct as well.</td>
+</tr>
+<tr>
+	<td style="text-align:left;">datatype[]</td>
+	<td style="text-align:left;">e.g. varchar(50)[] (defines an array of a type)</td>
+</tr>
+<tr>
+	<td style="text-align:left;" colspan="2">bit</td>
+</tr>
+<tr>
+	<td style="text-align:left;" colspan="2">boolean</td>
+</tr>
+<tr>
+	<td style="text-align:left;" colspan="2">bytea</td>
+</tr>
+<tr>
+	<td style="text-align:left;">character</td>
+	<td style="text-align:left;">varying(length),varchar(length)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">character(length)</td>
+	<td style="text-align:left;">char(length)</td>
+</tr>
+<tr>
+	<td style="text-align:left;" colspan="2">date</td>
+</tr>
+<tr>
+	<td style="text-align:left;" colspan="2">enum</td>
+</tr>
+<tr>
+	<td style="text-align:left;">double precision</td>
+	<td style="text-align:left;">float4 float8</td>
+</tr>
+<tr>
+	<td style="text-align:left;">integer</td>
+	<td style="text-align:left;">int4</td>
+</tr>
+<tr>
+	<td style="text-align:left;">bigint</td>
+	<td style="text-align:left;">int8</td>
+</tr>
+<tr>
+	<td style="text-align:left;">network address</td>
+	<td style="text-align:left;">inet, cidr, macaddr</td>
+</tr>
+<tr>
+	<td style="text-align:left;" colspan="2">money</td>
+</tr>
+<tr>
+	<td style="text-align:left;" colspan="2">numeric(length,precision)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">built-in (non-PostGIS) geometry types</td>
+	<td style="text-align:left;">point, lseg,box,path,polygon,circle</td>
+</tr>
+<tr>
+	<td style="text-align:left;" colspan="2">oid</td>
+</tr>
+<tr>
+	<td style="text-align:left;">serial</td>
+	<td style="text-align:left;">serial4</td>
+</tr>
+<tr>
+	<td style="text-align:left;">bigserial</td>
+	<td style="text-align:left;">serial8</td>
+</tr>
+<tr>
+	<td style="text-align:left;" colspan="2">text</td>
+</tr>
+<tr>
+	<td style="text-align:left;">time without timezone</td>
+	<td style="text-align:left;">time</td>
+</tr>
+<tr>
+	<td style="text-align:left;">time with timezone</td>
+	<td style="text-align:left;">timez</td>
+</tr>
+<tr>
+	<td style="text-align:left;">timestamp without timezone</td>
+	<td style="text-align:left;">timestamp</td>
+</tr>
+<tr>
+	<td style="text-align:left;">timestamp with timezone</td>
+	<td style="text-align:left;">timestampz</td>
+</tr>
+<tr>
+	<td style="text-align:left;" colspan="2">tsquery</td>
+</tr>
+<tr>
+	<td style="text-align:left;" colspan="2">tsvector</td>
+</tr>
+<tr>
+	<td style="text-align:left;" colspan="2">uuid (aka GUID)</td>
+</tr>
+<tr>
+	<td style="text-align:left;" colspan="2">xml</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;" colspan="2">Contribs and datatypes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">adminpack</td>
+	<td style="text-align:left;">pgAdmin admin pack</td>
+</tr>
+<tr>
+	<td style="text-align:left;">auto_explain<a href="#fn:1" id="fnref:1" title="see footnote" class="footnote">[1]</a></td>
+	<td style="text-align:left;">explain plan logging</td>
+</tr>
+<tr>
+	<td style="text-align:left;">citext (citext)</td>
+	<td style="text-align:left;">case insensitive text type</td>
+</tr>
+<tr>
+	<td style="text-align:left;">cube (cube)</td>
+	<td style="text-align:left;">multi-dimensional cube type</td>
+</tr>
+<tr>
+	<td style="text-align:left;">dblink</td>
+	<td style="text-align:left;">cross database/server queries</td>
+</tr>
+<tr>
+	<td style="text-align:left;">earthdistance</td>
+	<td style="text-align:left;">earth dist functions (depends on cube)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">fuzzstrmatch</td>
+	<td style="text-align:left;">fuzzy string match</td>
+</tr>
+<tr>
+	<td style="text-align:left;">ltree (ltree)</td>
+	<td style="text-align:left;">hierarchical tree type</td>
+</tr>
+<tr>
+	<td style="text-align:left;">hstore<a href="#fn:1" title="see footnote" class="footnote">[1]</a></td>
+	<td style="text-align:left;">(hstore) key value store type</td>
+</tr>
+<tr>
+	<td style="text-align:left;">moddatetime</td>
+	<td style="text-align:left;">moddatetime trigger</td>
+</tr>
+<tr>
+	<td style="text-align:left;">passwordcheck<a href="#fn:2" id="fnref:2" title="see footnote" class="footnote">[2]</a></td>
+	<td style="text-align:left;">ensure strong passwords</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_bench</td>
+	<td style="text-align:left;">benchmarking queries</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_buffercache</td>
+	<td style="text-align:left;">inspect buffer cache</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_trgm</td>
+	<td style="text-align:left;">trigrams for fuzzy search</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pgcrypto</td>
+	<td style="text-align:left;">cryptography functions</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pgAgent<a href="#fn:3" id="fnref:3" title="see footnote" class="footnote">[3]</a></td>
+	<td style="text-align:left;">job agent</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pgsphere<a href="#fn:3" title="see footnote" class="footnote">[3]</a></td>
+	<td style="text-align:left;">scircle, sellipse, spoint,sline,spolygon, spath,strans ..<br/>( spherical data types often used for astronomy)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pldbg - pl</td>
+	<td style="text-align:left;">debugger</td>
+</tr>
+<tr>
+	<td style="text-align:left;">postgis<a href="#fn:3" title="see footnote" class="footnote">[3]</a></td>
+	<td style="text-align:left;">geography, geometry, raster<br/>( raster packaged separately pre&#8211;2.0 (integrated in 2.0+)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">jaspa<a href="#fn:3" title="see footnote" class="footnote">[3]</a></td>
+	<td style="text-align:left;">geometry).<br/>(postgis like implementation of geometry and functions)<br/>( implemented in pljava/java instead of C/c++)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">tablefunc</td>
+	<td style="text-align:left;">crosstab queries</td>
+</tr>
+<tr>
+	<td style="text-align:left;">temporal<a href="#fn:3" title="see footnote" class="footnote">[3]</a></td>
+	<td style="text-align:left;">period (support for time periods)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">uuid-ossp</td>
+	<td style="text-align:left;">generating uuids</td>
+</tr>
+<tr>
+	<td style="text-align:left;">vacuum_lo</td>
+	<td style="text-align:left;">delete orphaned large objects</td>
+</tr>
+<tr>
+	<td style="text-align:left;">although xml2 is deprecated<br/>some functionality exists still<br/>not present in the built-in xml</td>
+	<td style="text-align:left;">e.g. xslt_process function</td>
+</tr>
+<tr>
+	<td style="text-align:left;" colspan="2">xml2<a href="#fn:4" id="fnref:4" title="see footnote" class="footnote">[4]</a></td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<caption id="adminfunctions">Admin Functions</caption>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Admin Functions</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">COPY .. FROM ..</td>
+</tr>
+<tr>
+	<td style="text-align:left;">COPY .. TO ..</td>
+</tr>
+<tr>
+	<td style="text-align:left;">current_setting</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_cancel_backend</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_column_size</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_database_size</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_relation_size</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_size_pretty</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_tablespace_size</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_total_relation_size</td>
+</tr>
+<tr>
+	<td style="text-align:left;">set_config</td>
+</tr>
+<tr>
+	<td style="text-align:left;">vacuum analyze verbose</td>
+</tr>
+<tr>
+	<td style="text-align:left;">vacuum full</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Languages</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">c ,plpgsql, sql<a href="#fn:1" title="see footnote" class="footnote">[1]</a></td>
+</tr>
+<tr>
+	<td style="text-align:left;">pljava</td>
+</tr>
+<tr>
+	<td style="text-align:left;">plperl(u)<a href="#fn:1" title="see footnote" class="footnote">[1]</a></td>
+</tr>
+<tr>
+	<td style="text-align:left;">plproxy<a href="#fn:5" id="fnref:5" title="see footnote" class="footnote">[5]</a></td>
+</tr>
+<tr>
+	<td style="text-align:left;">plpython<a href="#fn:1" title="see footnote" class="footnote">[1]</a></td>
+</tr>
+<tr>
+	<td style="text-align:left;">plpython31</td>
+</tr>
+<tr>
+	<td style="text-align:left;">plr<a href="#fn:5" title="see footnote" class="footnote">[5]</a></td>
+</tr>
+<tr>
+	<td style="text-align:left;">plruby<a href="#fn:5" title="see footnote" class="footnote">[5]</a></td>
+</tr>
+<tr>
+	<td style="text-align:left;">plscheme<a href="#fn:5" title="see footnote" class="footnote">[5]</a></td>
+</tr>
+<tr>
+	<td style="text-align:left;">plsh<a href="#fn:5" title="see footnote" class="footnote">[5]</a></td>
+</tr>
+<tr>
+	<td style="text-align:left;">pltcl</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Command Line</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">pgbench</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_dump</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_dumpall</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_resetxlog</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_restore</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_standby</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_upgrade <a href="#fn:1" title="see footnote" class="footnote">[1]</a></td>
+</tr>
+<tr>
+	<td style="text-align:left;">psql</td>
+</tr>
+<tr>
+	<td style="text-align:left;">vacuumdb</td>
+</tr>
+<tr>
+	<td style="text-align:left;">vacuumlo</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Large Object</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">Server</td>
+</tr>
+<tr>
+	<td style="text-align:left;">lo_create</td>
+</tr>
+<tr>
+	<td style="text-align:left;">lo_export</td>
+</tr>
+<tr>
+	<td style="text-align:left;">lo_import</td>
+</tr>
+<tr>
+	<td style="text-align:left;">lo_unlink</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><br/></td>
+</tr>
+<tr>
+	<td style="text-align:left;">Client</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><br/></td>
+</tr>
+<tr>
+	<td style="text-align:left;">lo_close</td>
+</tr>
+<tr>
+	<td style="text-align:left;">lo_create</td>
+</tr>
+<tr>
+	<td style="text-align:left;">lo_export</td>
+</tr>
+<tr>
+	<td style="text-align:left;">lo_import</td>
+</tr>
+<tr>
+	<td style="text-align:left;">lo_lseek</td>
+</tr>
+<tr>
+	<td style="text-align:left;">lo_open</td>
+</tr>
+<tr>
+	<td style="text-align:left;">lo_read</td>
+</tr>
+<tr>
+	<td style="text-align:left;">lo_tell</td>
+</tr>
+<tr>
+	<td style="text-align:left;">lo_unlink</td>
+</tr>
+<tr>
+	<td style="text-align:left;">lo_write</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Common Functions</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">cast, ::</td>
+</tr>
+<tr>
+	<td style="text-align:left;">coalesce</td>
+</tr>
+<tr>
+	<td style="text-align:left;">generate_series(start, stop [,step])</td>
+</tr>
+<tr>
+	<td style="text-align:left;">generate_series(start timestamp,</td>
+</tr>
+<tr>
+	<td style="text-align:left;">stop timetamp [,step inteval])</td>
+</tr>
+<tr>
+	<td style="text-align:left;">greatest(val1,val2,val3&#8230;.)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">least(val1,val2,val3,&#8230;)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">nullif</td>
+</tr>
+<tr>
+	<td style="text-align:left;">random</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Sequence (Serial) Functions</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">currval</td>
+</tr>
+<tr>
+	<td style="text-align:left;">lastval(serialname)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">nextval(serialname)</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">String Functions</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">||</td>
+</tr>
+<tr>
+	<td style="text-align:left;">ascii</td>
+</tr>
+<tr>
+	<td style="text-align:left;">chr</td>
+</tr>
+<tr>
+	<td style="text-align:left;">convert_from(string bytea, src_encoding name)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">convert_to(string text, dest_encoding name)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">encode(data bytea, [&#8216;base64&#8217;, &#8216;hex&#8217;, &#8216;escape&#8217;])</td>
+</tr>
+<tr>
+	<td style="text-align:left;">initcap</td>
+</tr>
+<tr>
+	<td style="text-align:left;">length</td>
+</tr>
+<tr>
+	<td style="text-align:left;">lower</td>
+</tr>
+<tr>
+	<td style="text-align:left;">lpad</td>
+</tr>
+<tr>
+	<td style="text-align:left;">ltrim</td>
+</tr>
+<tr>
+	<td style="text-align:left;">md5</td>
+</tr>
+<tr>
+	<td style="text-align:left;">octet_length</td>
+</tr>
+<tr>
+	<td style="text-align:left;">position(substring in string)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">quote_ident</td>
+</tr>
+<tr>
+	<td style="text-align:left;">quote_literal</td>
+</tr>
+<tr>
+	<td style="text-align:left;">quote_nullable</td>
+</tr>
+<tr>
+	<td style="text-align:left;">regexp_matches</td>
+</tr>
+<tr>
+	<td style="text-align:left;">regexp_replace</td>
+</tr>
+<tr>
+	<td style="text-align:left;">regexp_split_to_array(</td>
+</tr>
+<tr>
+	<td style="text-align:left;">string, pattern [, flags ])</td>
+</tr>
+<tr>
+	<td style="text-align:left;">regexp_split_to_table(</td>
+</tr>
+<tr>
+	<td style="text-align:left;">string, pattern [, flags])</td>
+</tr>
+<tr>
+	<td style="text-align:left;">repeat</td>
+</tr>
+<tr>
+	<td style="text-align:left;">replace</td>
+</tr>
+<tr>
+	<td style="text-align:left;">rpad</td>
+</tr>
+<tr>
+	<td style="text-align:left;">rtrim</td>
+</tr>
+<tr>
+	<td style="text-align:left;">split_part</td>
+</tr>
+<tr>
+	<td style="text-align:left;">string_agg1</td>
+</tr>
+<tr>
+	<td style="text-align:left;">strpos</td>
+</tr>
+<tr>
+	<td style="text-align:left;">substr</td>
+</tr>
+<tr>
+	<td style="text-align:left;">translate(string text, from text, to text)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">trim</td>
+</tr>
+<tr>
+	<td style="text-align:left;">upper</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Database Globals</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">current_date</td>
+</tr>
+<tr>
+	<td style="text-align:left;">current_time</td>
+</tr>
+<tr>
+	<td style="text-align:left;">current_timestamp</td>
+</tr>
+<tr>
+	<td style="text-align:left;">current_user</td>
+</tr>
+<tr>
+	<td style="text-align:left;">localtime</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Date and timestamp Functions</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">age(timestamp[,timestamp])</td>
+</tr>
+<tr>
+	<td style="text-align:left;">date_part(text, timestamp)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">century</td>
+</tr>
+<tr>
+	<td style="text-align:left;">day</td>
+</tr>
+<tr>
+	<td style="text-align:left;">decade</td>
+</tr>
+<tr>
+	<td style="text-align:left;">dow</td>
+</tr>
+<tr>
+	<td style="text-align:left;">doy</td>
+</tr>
+<tr>
+	<td style="text-align:left;">epoch</td>
+</tr>
+<tr>
+	<td style="text-align:left;">hour</td>
+</tr>
+<tr>
+	<td style="text-align:left;">minute</td>
+</tr>
+<tr>
+	<td style="text-align:left;">second</td>
+</tr>
+<tr>
+	<td style="text-align:left;">millisecond</td>
+</tr>
+<tr>
+	<td style="text-align:left;">microsecond</td>
+</tr>
+<tr>
+	<td style="text-align:left;">month</td>
+</tr>
+<tr>
+	<td style="text-align:left;">quarter</td>
+</tr>
+<tr>
+	<td style="text-align:left;">second</td>
+</tr>
+<tr>
+	<td style="text-align:left;">isodow</td>
+</tr>
+<tr>
+	<td style="text-align:left;">week</td>
+</tr>
+<tr>
+	<td style="text-align:left;">year</td>
+</tr>
+<tr>
+	<td style="text-align:left;">isoyear</td>
+</tr>
+<tr>
+	<td style="text-align:left;">millennium*</td>
+</tr>
+<tr>
+	<td style="text-align:left;">date_trunc(text,timestamp)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">extract(<em>field</em> from <em>interval|timestamp</em>)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">interval</td>
+</tr>
+<tr>
+	<td style="text-align:left;">to_char</td>
+</tr>
+<tr>
+	<td style="text-align:left;">to_date</td>
+</tr>
+<tr>
+	<td style="text-align:left;">to_timestamp</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Date Predicates</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">overlaps</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Array Constructors</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">ARRAY[[4,5,6],..]</td>
+</tr>
+<tr>
+	<td style="text-align:left;">ARRAY()</td>
+</tr>
+<tr>
+	<td style="text-align:left;">array_agg</td>
+</tr>
+<tr>
+	<td style="text-align:left;">array_append</td>
+</tr>
+<tr>
+	<td style="text-align:left;">array_cat</td>
+</tr>
+<tr>
+	<td style="text-align:left;">array_dims</td>
+</tr>
+<tr>
+	<td style="text-align:left;">array_prepend</td>
+</tr>
+<tr>
+	<td style="text-align:left;">array_to_string</td>
+</tr>
+<tr>
+	<td style="text-align:left;">SOME(array)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">regexp_split_to_array(string, pattern [, flags ])</td>
+</tr>
+<tr>
+	<td style="text-align:left;">string_to_array</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Array Operators</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">=</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Array Functions Other</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">array_lower(anyarray, int)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">array_upper(anyarray, int)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">generate_subscripts(array anyarray, dim int [,reverse boolean])</td>
+</tr>
+<tr>
+	<td style="text-align:left;">unnest</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Math Operators</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">% , ^, |/</td>
+</tr>
+<tr>
+	<td style="text-align:left;">||/,!, !!</td>
+</tr>
+<tr>
+	<td style="text-align:left;">@, &amp;, |</td>
+</tr>
+<tr>
+	<td style="text-align:left;">#,~, &lt;&lt;</td>
+</tr>
+<tr>
+	<td style="text-align:left;">&gt;&gt;</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Math Functions</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">abs</td>
+</tr>
+<tr>
+	<td style="text-align:left;">cbrt</td>
+</tr>
+<tr>
+	<td style="text-align:left;">ceiling</td>
+</tr>
+<tr>
+	<td style="text-align:left;">degrees</td>
+</tr>
+<tr>
+	<td style="text-align:left;">exp</td>
+</tr>
+<tr>
+	<td style="text-align:left;">floor</td>
+</tr>
+<tr>
+	<td style="text-align:left;">log</td>
+</tr>
+<tr>
+	<td style="text-align:left;">ln</td>
+</tr>
+<tr>
+	<td style="text-align:left;">mod</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pi</td>
+</tr>
+<tr>
+	<td style="text-align:left;">power</td>
+</tr>
+<tr>
+	<td style="text-align:left;">radians</td>
+</tr>
+<tr>
+	<td style="text-align:left;">random</td>
+</tr>
+<tr>
+	<td style="text-align:left;">sqrt</td>
+</tr>
+<tr>
+	<td style="text-align:left;">trunc</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Trig Functions</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">acos</td>
+</tr>
+<tr>
+	<td style="text-align:left;">asin</td>
+</tr>
+<tr>
+	<td style="text-align:left;">atan</td>
+</tr>
+<tr>
+	<td style="text-align:left;">atan2</td>
+</tr>
+<tr>
+	<td style="text-align:left;">cos</td>
+</tr>
+<tr>
+	<td style="text-align:left;">cot</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pi()</td>
+</tr>
+<tr>
+	<td style="text-align:left;">sin</td>
+</tr>
+<tr>
+	<td style="text-align:left;">tan</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Enums</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">&gt; &lt; = =</td>
+</tr>
+<tr>
+	<td style="text-align:left;">enum_cmp</td>
+</tr>
+<tr>
+	<td style="text-align:left;">enum_first</td>
+</tr>
+<tr>
+	<td style="text-align:left;">enum_larger</td>
+</tr>
+<tr>
+	<td style="text-align:left;">enum_last</td>
+</tr>
+<tr>
+	<td style="text-align:left;">enum_range</td>
+</tr>
+<tr>
+	<td style="text-align:left;">enum_smaller</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">XML</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">database_to_xml</td>
+</tr>
+<tr>
+	<td style="text-align:left;">database_to_xmlschema</td>
+</tr>
+<tr>
+	<td style="text-align:left;">query_to_xml</td>
+</tr>
+<tr>
+	<td style="text-align:left;">query_to_xml_and_xmlschema</td>
+</tr>
+<tr>
+	<td style="text-align:left;">table_to_xml</td>
+</tr>
+<tr>
+	<td style="text-align:left;">xmlagg</td>
+</tr>
+<tr>
+	<td style="text-align:left;">xmlattributes</td>
+</tr>
+<tr>
+	<td style="text-align:left;">xmlcomment</td>
+</tr>
+<tr>
+	<td style="text-align:left;">xmlconcat</td>
+</tr>
+<tr>
+	<td style="text-align:left;">xmlelement</td>
+</tr>
+<tr>
+	<td style="text-align:left;">xmlforest</td>
+</tr>
+<tr>
+	<td style="text-align:left;">xpath</td>
+</tr>
+<tr>
+	<td style="text-align:left;">xmlpi</td>
+</tr>
+<tr>
+	<td style="text-align:left;">xmlroot</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">JOIN Types</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">CROSS JOIN</td>
+</tr>
+<tr>
+	<td style="text-align:left;">EXCEPT (ALL)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">FULL JOIN</td>
+</tr>
+<tr>
+	<td style="text-align:left;">[INNER] JOIN</td>
+</tr>
+<tr>
+	<td style="text-align:left;">INTERSECT (ALL)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">LEFT JOIN</td>
+</tr>
+<tr>
+	<td style="text-align:left;">NATURAL JOIN</td>
+</tr>
+<tr>
+	<td style="text-align:left;">RIGHT JOIN</td>
+</tr>
+<tr>
+	<td style="text-align:left;">UNION (ALL)</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">SQL Keywords</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">ANY(array)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">BETWEEN .. AND</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CASE WHEN .. END</td>
+</tr>
+<tr>
+	<td style="text-align:left;">DELETE FROM</td>
+</tr>
+<tr>
+	<td style="text-align:left;">DISTINCT</td>
+</tr>
+<tr>
+	<td style="text-align:left;">DISTINCT ON</td>
+</tr>
+<tr>
+	<td style="text-align:left;">DO 1</td>
+</tr>
+<tr>
+	<td style="text-align:left;">for anonymous functions (plpgsql, lolcode, plperl)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">EXISTS</td>
+</tr>
+<tr>
+	<td style="text-align:left;">FROM</td>
+</tr>
+<tr>
+	<td style="text-align:left;">GROUP BY</td>
+</tr>
+<tr>
+	<td style="text-align:left;">HAVING</td>
+</tr>
+<tr>
+	<td style="text-align:left;">ILIKE</td>
+</tr>
+<tr>
+	<td style="text-align:left;">IN(..)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">LIKE</td>
+</tr>
+<tr>
+	<td style="text-align:left;">LIMIT ..OFFSET</td>
+</tr>
+<tr>
+	<td style="text-align:left;">NOT</td>
+</tr>
+<tr>
+	<td style="text-align:left;">NOT IN(..)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">NULLS FIRST</td>
+</tr>
+<tr>
+	<td style="text-align:left;">NULLS LAST</td>
+</tr>
+<tr>
+	<td style="text-align:left;">ORDER BY</td>
+</tr>
+<tr>
+	<td style="text-align:left;">someagg(.. ORDER BY somefield1, ..somefieldn)1</td>
+</tr>
+<tr>
+	<td style="text-align:left;">SELECT</td>
+</tr>
+<tr>
+	<td style="text-align:left;">SET</td>
+</tr>
+<tr>
+	<td style="text-align:left;">SIMILAR TO</td>
+</tr>
+<tr>
+	<td style="text-align:left;">TRUNCATE TABLE</td>
+</tr>
+<tr>
+	<td style="text-align:left;">UPDATE</td>
+</tr>
+<tr>
+	<td style="text-align:left;">USING</td>
+</tr>
+<tr>
+	<td style="text-align:left;">WHERE</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">COMMON TABLE EXPRESSION (CTE)</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">WITH [RECURSIVE] <em>tablevar1</em><br/>AS (<em>table_sql_def</em>),<br/>.., tablevarn AS (<em>table_sql_defn</em>)<br/><em>final_query</em><br/></td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Window Keywords</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">BETWEEN <em>frame_start</em> AND <em>frame_end</em>1</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CURRENT ROW</td>
+</tr>
+<tr>
+	<td style="text-align:left;">ORDER BY</td>
+</tr>
+<tr>
+	<td style="text-align:left;">OVER</td>
+</tr>
+<tr>
+	<td style="text-align:left;">PARTITION BY</td>
+</tr>
+<tr>
+	<td style="text-align:left;">RANGE | ROWS 2</td>
+</tr>
+<tr>
+	<td style="text-align:left;">UNBOUNDED FOLLOWING</td>
+</tr>
+<tr>
+	<td style="text-align:left;">UNBOUNDED PRECEDING</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;"><a href="http://www.postgresql.org/docs/9.0/static/functions-window.html">Window Functions</a></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">In addition to window functions any aggregate function can be used in a window expression</td>
+</tr>
+<tr>
+	<td style="text-align:left;">cume_dist dense_rank</td>
+</tr>
+<tr>
+	<td style="text-align:left;">first_value</td>
+</tr>
+<tr>
+	<td style="text-align:left;">lag lead last_value</td>
+</tr>
+<tr>
+	<td style="text-align:left;">ntile nth_value</td>
+</tr>
+<tr>
+	<td style="text-align:left;">percent_rank rank</td>
+</tr>
+<tr>
+	<td style="text-align:left;">row_number</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Aggregates</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">(For all aggregates you can also use:<br/>someagg(somefield ORDER BY somefield1,&#8230;.somefieldn)<br/>someagg(DISTINCT somefield)<br/>someagg(DISTINCT somefield<br/> ORDER BY somefield)<a href="#fn:2" title="see footnote" class="footnote">[2]</a></td>
+</tr>
+<tr>
+	<td style="text-align:left;">array_agg</td>
+</tr>
+<tr>
+	<td style="text-align:left;">avg</td>
+</tr>
+<tr>
+	<td style="text-align:left;">bit_and, bit_or</td>
+</tr>
+<tr>
+	<td style="text-align:left;">boolean_and, boolean_or</td>
+</tr>
+<tr>
+	<td style="text-align:left;">corr</td>
+</tr>
+<tr>
+	<td style="text-align:left;">count</td>
+</tr>
+<tr>
+	<td style="text-align:left;">covar_pop, covar_samp</td>
+</tr>
+<tr>
+	<td style="text-align:left;">every</td>
+</tr>
+<tr>
+	<td style="text-align:left;">max</td>
+</tr>
+<tr>
+	<td style="text-align:left;">min</td>
+</tr>
+<tr>
+	<td style="text-align:left;">regr_avgx, regr_avgy</td>
+</tr>
+<tr>
+	<td style="text-align:left;">regr_count</td>
+</tr>
+<tr>
+	<td style="text-align:left;">regr_intercept</td>
+</tr>
+<tr>
+	<td style="text-align:left;">regr_r2</td>
+</tr>
+<tr>
+	<td style="text-align:left;">regr_slope</td>
+</tr>
+<tr>
+	<td style="text-align:left;">regr_sxx</td>
+</tr>
+<tr>
+	<td style="text-align:left;">regr_sxy</td>
+</tr>
+<tr>
+	<td style="text-align:left;">regr_syy</td>
+</tr>
+<tr>
+	<td style="text-align:left;">stddev</td>
+</tr>
+<tr>
+	<td style="text-align:left;">stddev_pop</td>
+</tr>
+<tr>
+	<td style="text-align:left;">stddev_samp</td>
+</tr>
+<tr>
+	<td style="text-align:left;">string_agg(<em>expression</em>, <em>delimeter</em>)1</td>
+</tr>
+<tr>
+	<td style="text-align:left;">sum</td>
+</tr>
+<tr>
+	<td style="text-align:left;">variance</td>
+</tr>
+<tr>
+	<td style="text-align:left;">var_pop</td>
+</tr>
+<tr>
+	<td style="text-align:left;">var_samp</td>
+</tr>
+<tr>
+	<td style="text-align:left;">xmlagg</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Key pg_catalog Tables/Views</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">pg_class</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_rules</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_settings</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_stat_activity</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_stat_database</td>
+</tr>
+<tr>
+	<td style="text-align:left;">pg_tablespaces</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">DDL</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">ADD CONSTRAINT</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CREATE AGGREGATE</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CREATE CAST</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CREATE (DEFAULT) CONVERSION</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CREATE DATABASE</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CREATE DOMAIN</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CREATE [OR REPLACE] FUNCTION</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CREATE (UNIQUE) INDEX</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CREATE LANGUAGE</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CREATE OPERATOR</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CREATE OPERATOR FAMILY</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CREATE RULE</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CREATE SCHEMA</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CREATE SEQUENCE</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CREATE TABLE2</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CREATE TABLESPACE 2</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CREATE TEXT SEARCH DICTIONARY</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CREATE TRIGGER 2ALTER TABLE</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CREATE TYPE</td>
+</tr>
+<tr>
+	<td style="text-align:left;">CREATE [OR REPLACE] VIEW</td>
+</tr>
+<tr>
+	<td style="text-align:left;">DROP <em>objecttype</em> <em>object_name</em>[IF EXISTS]</td>
+</tr>
+<tr>
+	<td style="text-align:left;">ALTER ..(supported for DATABASE, TABLE, TABLESPACE)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">ALTER TABLE .. <em>DROP COLUMN</em> [IF EXISTS] 1</td>
+</tr>
+<tr>
+	<td style="text-align:left;">ALTER TABLE .. <em>DROP CONSTRAINT</em> [IF EXISTS] 1</td>
+</tr>
+<tr>
+	<td style="text-align:left;">ALTER TABLE .. ADD CONSTRAINT .. EXCLUDE1</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;" colspan="2">DCL</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;" colspan="2">CREATE ROLE</td>
+</tr>
+<tr>
+	<td style="text-align:left;" colspan="2">GRANT ALL ON SCHEMA &#8230;</td>
+</tr>
+<tr>
+	<td style="text-align:left;">GRANT</td>
+	<td style="text-align:left;">[ALL, INSERT, SELECT, UPDATE, DELETE,<br/>TRUNCATE, REFERENCES, TRIGGER] <br/> ON TABLES to <em>somerole</em> <a href="#fn:2" title="see footnote" class="footnote">[2]</a></td>
+</tr>
+<tr>
+	<td style="text-align:left;" colspan="2">GRANT [EXECUTE] ON ALL FUNCTIONS <a href="#fn:2" title="see footnote" class="footnote">[2]</a></td>
+</tr>
+<tr>
+	<td style="text-align:left;" colspan="2">ALTER DEFAULT PRIVILEGES IN SCHEMA<a href="#fn:2" title="see footnote" class="footnote">[2]</a></td>
+</tr>
+<tr>
+	<td style="text-align:left;">REVOKE</td>
+	<td style="text-align:left;">[ALL ..]</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">PostgreSQL Keywords</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">EXPLAIN ANALYZE VERBOSE</td>
+</tr>
+<tr>
+	<td style="text-align:left;">EXPLAIN (ANALYZE true, COSTS true, FORMAT json | yaml | xml) <a href="#fn:2" title="see footnote" class="footnote">[2]</a></td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Key information_schema Views</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;">columns</td>
+</tr>
+<tr>
+	<td style="text-align:left;">column_privileges</td>
+</tr>
+<tr>
+	<td style="text-align:left;">enabled_roles</td>
+</tr>
+<tr>
+	<td style="text-align:left;">key_column_usage</td>
+</tr>
+<tr>
+	<td style="text-align:left;">referential_constraints</td>
+</tr>
+<tr>
+	<td style="text-align:left;">routines (lists all functions)</td>
+</tr>
+<tr>
+	<td style="text-align:left;">sequences</td>
+</tr>
+<tr>
+	<td style="text-align:left;">schemata</td>
+</tr>
+<tr>
+	<td style="text-align:left;">tables</td>
+</tr>
+<tr>
+	<td style="text-align:left;">views</td>
+</tr>
+</tbody>
+</table>
+<h4 id="examplesofnewfeaturesinpostgresql9.0ddl">Examples of New Features in PostgreSQL 9.0 (DDL)</h4>
+
+<p>|For some of these examples, we will use the contrived table. Demonstrates new ability to define primary/unique key deferrable|</p>
+
+<pre><code>CREATE TABLE passengers(
+    passenger_id serial PRIMARY KEY DEFERRABLE INITIALLY DEFERRED,
+        passenger_name varchar(100),
+        weight integer, aisle varchar(10));
+INSERT INTO passengers(passenger_name, weight, aisle)
+    VALUES ('Jack', 200, '18'), ('Jill', 150, '20'),
+        ('Cathy', 150, '20') , ('Simon',1000, '18');
+</code></pre>
+
+<p><em>SELECT INTO and CREATE TABLE AS</em> now return row counts to the client in their command tags</p>
+
+<pre><code>SELECT aisle, COUNT(*) as tally INTO passengers_tally
+FROM passengers GROUP BY aisle;
+</code></pre>
+
+<p>result</p>
+
+<pre><code>SELECT 2
+</code></pre>
+
+<p>Allow IF EXISTS drop on columns and constraints</p>
+
+<pre><code>ALTER TABLE passengers_tally DROP COLUMN
+    IF EXISTS age ;
+ALTER TABLE passengers_tally DROP CONSTRAINT
+    IF EXISTS pk_passengers_tally;
+</code></pre>
+
+<p>Using exclusion constraints - PostGIS example - no overlapping point bounding box</p>
+
+<pre><code>CREATE TABLE poi(pt_id serial PRIMARY KEY,    
+    pt geography(Point,4326));
+ALTER TABLE poi ADD CONSTRAINT uidxb_poi
+  EXCLUDE USING gist (pt WITH &amp;&amp;);
+</code></pre>
+
+<h4 id="examplesofnewfeaturesinpostgresql9.0dml">Examples of New Features in PostgreSQL 9.0 (DML)</h4>
+
+<p>swapping keys &#8211; Note I can get away with this
+even though the update will before completion cause a key violation because passenger_id is marked as DEFERRED</p>
+
+<pre><code>UPDATE passengers
+    SET passenger_id =
+        CASE WHEN passenger_id = 4 THEN 1 ELSE passenger_id + 1 END;
+</code></pre>
+
+<p>Using ORDERED aggregates and the new string_agg aggregate function</p>
+
+<pre><code>SELECT aisle, string_agg(passenger_name, '|' ORDER BY weight) As pass_list_by_wgt,
+    string_agg(passenger_name, '|' ORDER BY passenger_name) As pass_list_name,
+    array_agg(DISTINCT weight ORDER BY weight)   As arr_weight
+FROM passengers
+GROUP BY aisle ORDER BY aisle;
+</code></pre>
+
+<p>results</p>
+
+<pre><code> aisle | pass_list_by_wgt | pass_list_name | arr_weight
+ ------+------------------+----------------+------------
+ 18    | Jack|Simon       | Jack|Simon     | {200,1000}
+ 20    | Jill|Cathy       | Cathy|Jill     | {150}
+</code></pre>
+
+<p>Using WINDOW FUNCTIONS ROWS</p>
+
+<pre><code>SELECT aisle, passenger_name, weight,
+  SUM(weight) OVER (ORDER BY weight, aisle, passenger_name
+    ROWS BETWEEN 0 PRECEDING AND 2 FOLLOWING) As weight_look_2_ahead
+FROM passengers
+ORDER BY weight,aisle,passenger_name;
+aisle | passenger_name | weight | weight_look_2_ahead
+------+----------------+--------+---------------------
+20    | Cathy          |    150 |                 500
+20    | Jill           |    150 |                1350
+18    | Jack           |    200 |                1200
+18    | Simon          |   1000 |                1000
+</code></pre>
+
+<p>WINDOW FUNCTION RANGE - tally weight of all people of equal or lower weight in same aisle</p>
+
+<pre><code>SELECT aisle, passenger_name, weight,
+  SUM(weight) OVER (PARTITION BY aisle ORDER BY weight
+    RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) As weight_aisle_lower
+FROM passengers
+ORDER BY aisle,weight,passenger_name;
+</code></pre>
+
+<p>results</p>
+
+<pre><code> aisle | passenger_name | weight | weight_aisle_lower
+ ------+----------------+--------+---------------------
+ 18    | Jack           |    200 |                200
+ 18    | Simon          |   1000 |               1200
+ 20    | Cathy          |    150 |                300
+ 20    | Jill           |    150 |                300
+</code></pre>
+
+<h4 id="examplesofnewfeaturesinpostgresql9.0-functionenhancements">Examples of New Features in PostgreSQL 9.0 - Function enhancements</h4>
+
+<p>Anonymous function using new DO command - adds a date_add field to all tables in public schema that don&#8217;t already have one</p>
+
+<pre><code> DO $$
+ DECLARE var_searchsql text;
+ BEGIN
+    var_searchsql :=  string_agg('ALTER TABLE '
+     || t.table_schema || '.'
+  || t.table_name
+      || ' ADD COLUMN date_add timestamp DEFAULT(current_timestamp)', ';')
+                            FROM information_schema.tables t
+     LEFT JOIN information_schema.columns c
+     ON (t.table_name = c.table_name AND
+         t.table_schema = c.table_schema AND c.column_name = 'date_add')
+    WHERE t.table_type = 'BASE TABLE' AND t.table_schema = 'public'
+    AND c.table_name IS NULL;
+    IF var_searchsql &amp;gt; '' THEN
+        EXECUTE var_searchsql;
+    END IF;
+ END$$ language plpgsql;
+</code></pre>
+
+<p>function named parameters</p>
+
+<pre><code> CREATE FUNCTION random_data(num_records integer,
+                  multiplier float)
+     RETURNS SETOF float AS
+ $$
+     SELECT random()*i*$2
+         FROM generate_series(1,$1) As i;
+ $$ language 'sql';
+</code></pre>
+
+<p>calling the function with named parameters</p>
+
+<pre><code> SELECT foo.i
+ FROM random_data(multiplier:= 1000,
+     num_records:= 10) As foo(i);
+</code></pre>
+
+<h4 id="examplesofnewfeaturesinpostgresql9.0dcl">Examples of New Features in PostgreSQL 9.0 (DCL)</h4>
+
+<p>These examples will use these roles,database, schema</p>
+
+<pre><code> CREATE ROLE jungle;
+ CREATE ROLE regina LOGIN CREATEDB PASSWORD 'queen^warrior';
+ GRANT jungle TO regina;
+ CREATE ROLE leo LOGIN PASSWORD '&lt;a class=&quot;linkclass&quot; href=&quot;mailto:lion@king.dom&quot;&gt;lion@king.dom&lt;/a&gt;';
+ CREATE DATABASE kingdom OWNER regina;
+
+ REVOKE SELECT ON ALL TABLES IN SCHEMA public FROM jungle;
+</code></pre>
+
+<p>Granting/Revoking permissions on existing tables in schema public</p>
+
+<pre><code> GRANT ALL PRIVILEGES ON
+    ALL TABLES IN SCHEMA public TO jungle;
+</code></pre>
+
+<p>Granting all permissions on future tables in schema public to jungle.<br/>
+There are some nuances we won&#8217;t get into such as permissions are only granted to objects that the grantor has permissions to GRANT using the optional [FOR role] option allows you to designate a different grantor role other than current user as long as current user/has rights to promote to said role.</p>
+
+<pre><code> ALTER DEFAULT PRIVILEGES IN SCHEMA public
+    GRANT ALL PRIVILEGES ON TABLES TO jungle
+    GRANT USAGE, SELECT, UPDATE ON SEQUENCES TO jungle;
+
+ ALTER DEFAULT PRIVILEGES IN SCHEMA public  
+    GRANT USAGE, SELECT, UPDATE ON SEQUENCES TO jungle;
+</code></pre>
+
+<h4 id="adminexamples">Admin Examples</h4>
+
+<pre><code>SELECT pg_size_pretty(pg_tablespace_size('pg_default')) as tssize,
+    pg_size_pretty(pg_database_size('somedb')) as dbsize,
+    pg_size_pretty(pg_relation_size('someschema.sometable')) as tblsize;
+</code></pre>
+
+<p>Example importing data to table sometablefrom tab delimited where NULLs appear as NULL </p>
+
+<pre><code>COPY sometable FROM '/path/to/textfile.txt' USING DELIMITERS 't' WITH NULL As 'NULL';
+</code></pre>
+
+<p>Example importing data to table sometable from csv delimited that includes field headers</p>
+
+<pre><code>COPY sometable FROM 'C:/somefile.csv' WITH CSV HEADER;
+</code></pre>
+
+<p>Example exporting a query to a comma separated (CSV) called textfile.csv setting NULLS to text NULL</p>
+
+<pre><code>COPY (SELECT * FROM sometable WHERE somevalue LIKE '%') TO '/path/to/textfile.csv'
+WITH NULL As 'NULL' CSV HEADER QUOTE AS '&quot;';
+</code></pre>
+
+<p>Vacuuming</p>
+
+<pre><code>vacuum analyze verbose;
+vacuum sometable;
+vacuum full;
+</code></pre>
+
+<p>Kills all active queries in selected db and list out process id and usename of process and if kill successful</p>
+
+<pre><code>SELECT procpid, usename, pg_cancel_backend(procpid)
+FROM pg_stat_activity
+WHERE datname = 'somedb';
+</code></pre>
+
+<p>introduced in 8.3 - terminates backedn</p>
+
+<pre><code>SELECT procpid, usename, pg_terminate_backend(procpid)
+FROM pg_stat_activity
+WHERE datname = 'somedb';
+</code></pre>
+
+<h4 id="ddlexamples">DDL Examples</h4>
+
+<pre><code>CREATE DATABASE somedb
+    WITH OWNER = someuser
+    WITH ENCODING='UTF8' TEMPLATE=template0 TABLESPACE = pg_default
+     LC_COLLATE = 'English_United States.1252'
+     LC_CTYPE = 'English_United States.1252';
+
+CREATE TABLE orders(order_id serial NOT NULL,
+    order_addeddt timestamp with time zone,
+    order_rating rating,
+    CONSTRAINT pk_orders_order_id PRIMARY KEY (order_id)
+);
+
+CREATE TYPE rating AS
+    ENUM('none', 'bronze', 'silver', 'gold', 'platinum');
+
+CREATE OR REPLACE FUNCTION first_element_state(anyarray, anyelement)
+    RETURNS anyarray AS
+$$
+    SELECT CASE WHEN array_upper($1,1) IS NULL
+        THEN array_append($1,$2) ELSE $1 END;
+$$ LANGUAGE 'sql' IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION first_element(anyarray)
+    RETURNS anyelement AS
+$$
+    SELECT ($1)[1] ; $$ LANGUAGE 'sql' IMMUTABLE;
+
+CREATE AGGREGATE first(anyelement) ( SFUNC=first_element_state,
+    STYPE=anyarray, FINALFUNC=first_element);
+</code></pre>
+
+<h4 id="selectexamples">SELECT EXAMPLES</h4>
+
+<pre><code>SELECT o.order_id, o.order_date, o.approved_date,
+    COUNT(i.item_id) As nlineitems,
+    SUM(i.unit_price*i.num_units) As total
+FROM orders o
+    INNER JOIN orderitems i ON o.order_id = i.order_id
+GROUP BY o.order_id, o.order_date, o.approved_date
+HAVING SUM(i.unit_price*i.num_units) &amp;gt; 200
+ORDER BY o.approved_date NULLS FIRST;
+</code></pre>
+
+<p>CTE Example (8.4+)</p>
+
+<pre><code>WITH pt(x,y) AS (
+    SELECT 100*random(), 200*random()
+        FROM generate_series(1,10) As i
+),
+pt2(x,y) AS
+( SELECT generate_series(1,2) As x, generate_series(4,5) )
+SELECT pt.x + pt2.y AS a, pt2.x*pt.y AS b
+FROM pt CROSS JOIN pt2;
+</code></pre>
+
+<h4 id="updateinsertdeleteexamples">Update/Insert/Delete Examples</h4>
+
+<pre><code>UPDATE sometable SET somevalue = 5
+WHERE sometable.somename = 'stuff';
+
+UPDATE sometable
+    SET calccount = s.thecount
+        FROM (SELECT COUNT(someothertable.someid) as thecount,
+            someothertable.someid
+            FROM someothertable
+              GROUP BY someothertable.someid) s
+            WHERE sometable.someid = s.someid;
+    DELETE FROM sometable
+      WHERE somevalue = 'something';
+</code></pre>
+
+<p>This only works on 8.1+</p>
+
+<pre><code>INSERT INTO orders(order_addeddt, order_rating)
+    VALUES ('2007-10-01 20:40', 'gold'),
+    ('2007-09-01 11:00 AM', 'silver'),
+        ('2007-09-02 10:00 PM', 'none'), ('2007-10-10 PM', 'bronze');
+</code></pre>
+
+<p>Pre 8.1+ only supports single values inserts</p>
+
+<pre><code>INSERT INTO orders(order_addeddt, order_rating)
+    VALUES ('2007-10-01 20:40', 'gold');
+</code></pre>
+
+<p>This is a fast delete that deletes everything in a table so be cautious.
+Only works on tables not referenced in foreign key constraints</p>
+
+<pre><code>TRUNCATE TABLE sometable;
+</code></pre>
+
+<h4 id="commandlineexamples">Command Line Examples</h4>
+
+<pre><code>pg_dump -i -h someserver -p 5432 -U someuser -F c -b -v -f &quot;somepathsomedb.backup&quot; somedb
+pg_dumpall -i -h someserver -p 5432 -U someuser -c -o -f &quot;somepathalldbs.sql&quot;
+pg_restore -i -h someserver -p 5432 -U someuser -d somedb -l &quot;somepathsomedb.backup&quot;
+psql -h someserver -p 5432 -U someuser -d somedb -f &quot;somepathsomefiletorun.sql&quot;
+psql -h someserver -p 5432 -U someuser -d somedb -c &quot;CREATE TABLE sometable(st_id serial, st_name varchar(25))&quot;
+</code></pre>
+
+<p>output query as xml </p>
+
+<pre><code>psql -h someserver -p 5432 -U someuser -d somedb -P &quot;t&quot; -c &quot;SELECT query_to_xml('select * from sometable', false, false, 'sometable')&quot; -o &quot;outputfile.xml&quot;;
+</code></pre>
+
+<p>New &#8211; only analyze</p>
+
+<pre><code>vacuumdb --analyze-only
+</code></pre>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>Enhanced in this release <a href="#fnref:1" title="return to article" class="reversefootnote">&#160;&#8617;</a></p>
+</li>
+
+<li id="fn:2">
+<p>New in this release <a href="#fnref:2" title="return to article" class="reversefootnote">&#160;&#8617;</a></p>
+</li>
+
+<li id="fn:3">
+<p>means distributed separately <a href="#fnref:3" title="return to article" class="reversefootnote">&#160;&#8617;</a></p>
+</li>
+
+<li id="fn:4">
+<p>deprecated
+included data types in () <a href="#fnref:4" title="return to article" class="reversefootnote">&#160;&#8617;</a></p>
+</li>
+
+<li id="fn:5">
+<p>packaged separately <a href="#fnref:5" title="return to article" class="reversefootnote">&#160;&#8617;</a></p>
+</li>
+
+</ol>
+</div>
+
+
+</body>
+</html>
